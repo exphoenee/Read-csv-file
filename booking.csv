@@ -1,0 +1,536 @@
+﻿Projekt;Cég;Dátum;Nap;Kezdete;Vége;Feladat;Munkavégzés helye;Mennyiség;Egység;Teljesítmény fajta;Óradíj;Teljesítményfajta felülírása;Óradíj;Munkaérték
+DAS SAE L2 LabView programkészítés 1; GAH ;2019.12.09;H;8:30;17:00;Alapprogram, Login Modul elkészítése;EnforSol iroda; 8,5    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 83 300 Ft 
+DAS SAE L2 LabView programkészítés 1; GAH ;2019.12.10;K;12:00;13:00;Beszerzés intézése;EnforSol iroda; 1,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 9 800 Ft 
+FGSZ csapágydiag; GAH ;2019.12.10;K;9:00;14:00;Felmérés;EnforSol iroda; 5,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 32 500 Ft 
+DAS SAE L2 LabView programkészítés 1; GAH ;2019.12.11;Sz;10:00;11:00;Design review;EnforSol iroda; 1,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 9 800 Ft 
+DAS SAE L2 LabView programkészítés 1; GAH ;2019.12.11;Sz;11:00;12:00;Jelszótitkosítás porgramozása, user admin rendszer elkészítése;EnforSol iroda; 1,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 9 800 Ft 
+DAS SAE L2 LabView programkészítés 1; GAH ;2019.12.11;Sz;13:00;17:00;Userek kezelését, hozzáadását kezelő progrem elkészítése;EnforSol iroda; 4,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 39 200 Ft 
+DAS SAE L2 LabView programkészítés 1; GAH ;2019.12.12;Cs;9:00;17:00;Keretprogram elkészítése;EnforSol iroda; 8,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 78 400 Ft 
+DAS SAE L2 LabView programkészítés 1; GAH ;2019.12.13;P;8:00;13:00;Keretprogram elkészítése;EnforSol iroda; 5,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 49 000 Ft 
+DAS SAE L2 LabView programkészítés 1; GAH ;2019.12.16;H;8:00;16:00;Keretprogram elkészítése;EnforSol iroda; 8,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 78 400 Ft 
+DAS SAE L2 LabView programkészítés 1; GAH ;2019.12.17;K;8:30;9:30;Design review;EnforSol iroda; 1,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 9 800 Ft 
+DAS SAE L2 LabView programkészítés 1; GAH ;2019.12.17;K;9:30;16:30;Modulok készítése;EnforSol iroda; 7,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 68 600 Ft 
+DAS SAE L2 LabView programkészítés 1; GAH ;2019.12.18;Sz;9:00;16:00;Modulok készítése;EnforSol iroda; 7,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 68 600 Ft 
+DAS SAE L2 LabView programkészítés 1; GAH ;2019.12.19;Cs;8:00;16:00;Architektúra tervezése;EnforSol iroda; 8,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 78 400 Ft 
+DAS SAE L2 LabView programkészítés 1; GAH ;2020.01.02;Cs;8:00;16:00;Ini kezelés programozása;EnforSol iroda; 8,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 78 400 Ft 
+DAS SAE L2 LabView programkészítés 1; GAH ;2020.01.03;P;8:00;16:00;Hardware konfiguráció, keretprogram készítés;EnforSol iroda; 8,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 78 400 Ft 
+DAS SAE L2 LabView programkészítés 1; GAH ;2020.01.04;Szo;10:00;13:30;Login és user létrehozás átalakítása;EnforSol iroda; 3,5    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 34 300 Ft 
+DAS SAE L2 LabView programkészítés 1; GAH ;2020.01.06;H;7:30;12:30;Műszaki tisztázás, NI beszerzés elindítása;GAH iroda; 5,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 49 000 Ft 
+DAS SAE L2 LabView programkészítés 1; GAH ;2020.01.06;H;13:30;17:30;Nice Label programozás;GAH iroda; 4,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 39 200 Ft 
+DAS SAE L2 LabView programkészítés 2 ; GAH ;2020.01.07;K;8:00;16:00;Zerbra kódolvasó programozása,  NI beszerzés, Toshiba nyomtató beizzítása;GAH iroda; 8,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 78 400 Ft 
+DAS SAE L2 LabView programkészítés 2 ; GAH ;2020.01.08;Sz;8:00;18:00;Userek kezelésének szerkeszthetővé tétele;GAH iroda; 10,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 98 000 Ft 
+DAS SAE L2 LabView programkészítés 2 ; GAH ;2020.01.09;Cs;8:00;13:00;USB kártyaolvasó programozása;GAH iroda; 5,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 49 000 Ft 
+DAS SAE L2 LabView programkészítés 2 ; GAH ;2020.01.10;P;7:00;14:00;USB kártyaolvasó programozása;GAH iroda; 7,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 68 600 Ft 
+DAS SAE L2 LabView Kiszállás ; GAH ;2020.01.13;H;14:30;15:30;DiagFlash megbeszélés;GAH iroda; 1,0    ; óra ; Kiszállás Kecskemét ; 22 000 Ft ; Kiszállás Kecskemét ; 22 000 Ft ; 22 000 Ft 
+DAS SAE L2 LabView programkészítés 2 ; GAH ;2020.01.13;H;10:00;12:00;Software specifikáció átbeszélése;GAH iroda; 2,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 19 600 Ft 
+DAS SAE L2 LabView programkészítés 2 ; GAH ;2020.01.13;H;14:30;15:30;DiagFlash megbeszélés;GAH iroda; 1,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 9 800 Ft 
+DAS SAE L2 LabView programkészítés 2 ; GAH ;2020.01.14;K;8:00;15:30;NI eszköz vezérlésének felprogramozása;GAH iroda; 7,5    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 73 500 Ft 
+Aranycipó logisztika ajánalt készítés; GAH ;2020.01.15;Sz;13:00;14:00;Felmérés;GAH iroda; 1,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 6 500 Ft 
+DAS SAE L2 LabView programkészítés 2 ; GAH ;2020.01.15;Sz;8:00;13:00;NI eszköz vezérlésének felprogramozása;GAH iroda; 5,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 49 000 Ft 
+DAS SAE L2 LabView programkészítés 2 ; GAH ;2020.01.15;Sz;14:30;16:00;NI eszköz vezérlésének felprogramozása;GAH iroda; 1,5    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 14 700 Ft 
+DAS SAE L2 LabView programkészítés 2 ; GAH ;2020.01.16;Cs;8:00;17:30;NI eszköz vezérlésének felprogramozása;GAH iroda; 9,5    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 93 100 Ft 
+DAS SAE L2 LabView programkészítés 2 ; GAH ;2020.01.17;P;8:00;13:30;NI eszköz vezérlésének felprogramozása;GAH iroda; 5,5    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 53 900 Ft 
+DAS SAE L2 LabView programkészítés 2 ; GAH ;2020.01.18;Szo;10:30;11:30;Bejeltkezés átalakítása 3 féle módszerűre;GAH iroda; 1,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 9 800 Ft 
+DAS SAE L2 LabView programkészítés 2 ; GAH ;2020.01.20;H;9:00;14:00;NI eszköz vezérlésének felprogramozása;GAH iroda; 5,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 49 000 Ft 
+DAS SAE L2 LabView programkészítés 2 ; GAH ;2020.01.21;K;10:00;15:00;NI eszköz vezérlésének felprogramozása;GAH iroda; 5,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 49 000 Ft 
+DAS SAE L2 LabView programkészítés 2 ; GAH ;2020.01.22;Sz;10:00;15:00;Keyence programozása;GAH iroda; 5,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 49 000 Ft 
+DAS SAE L2 LabView programkészítés 2 ; GAH ;2020.01.23;Cs;8:00;16:00;Keyence programozása;GAH iroda; 8,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 78 400 Ft 
+DAS SAE L2 LabView programkészítés 2 ; GAH ;2020.01.23;Cs;11:00;13:00;NI eszköz vezérlésének felprogramozása;GAH iroda; 2,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 19 600 Ft 
+DAS SAE L2 LabView alkatrész rendelés ; GAH ;2020.01.24;P;11:00;12:00;Eszközbeszerzés;GAH iroda; 1,0    ; óra ; HESTORE beszerzés ; 5 488 Ft ; HESTORE beszerzés ; 5 488 Ft ; 5 488 Ft 
+DAS SAE L2 LabView programkészítés 2 ; GAH ;2020.01.27;H;8:00;14:00;Toshiba nyomtató beállítása;GAH iroda; 6,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 58 800 Ft 
+DAS SAE L2 LabView programkészítés 2 ; GAH ;2020.01.28;K;8:00;13:00;Toshiba nyomtató beállítása;GAH iroda; 5,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 49 000 Ft 
+DAS SAE L2 LabView programkészítés 2 ; GAH ;2020.01.29;Sz;8:00;14:00;NI eszköz vezérlésének felprogramozása;GAH iroda; 6,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 58 800 Ft 
+DAS SAE L2 LabView programkészítés 2 ; GAH ;2020.01.30;Cs;8:00;13:00;NI eszköz vezérlésének felprogramozása;GAH iroda; 5,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 49 000 Ft 
+DAS SAE L2 LabView programkészítés 2 ; GAH ;2020.01.31;P;7:00;11:30;Smart kártya programozása;GAH iroda; 4,5    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 44 100 Ft 
+DAS SAE L2 LabView programkészítés 2 ; GAH ;2020.01.31;P;12:30;14:00;Smart kártya programozása;GAH iroda; 1,5    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 14 700 Ft 
+DAS SAE L2 LabView programkészítés 3; GAH ;2020.02.02;V;11:00;13:00;Smart kártya programozása;GAH iroda; 2,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 19 600 Ft 
+DAS SAE L2 LabView programkészítés 3; GAH ;2020.02.02;V;17:00;18:00;Loginjelentkezés elkészítése;GAH iroda; 1,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 9 800 Ft 
+DAS SAE L2 LabView programkészítés 3; GAH ;2020.02.03;H;10:00;16:00;DiagFlash próbálkozás;GAH iroda; 6,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 58 800 Ft 
+DAS SAE L2 LabView programkészítés 3; GAH ;2020.02.04;K;8:30;15:30;DiagFlash próbálkozás;GAH iroda; 7,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 68 600 Ft 
+DAS SAE L2 LabView programkészítés 3; GAH ;2020.02.05;Sz;12:30;16:30;NiceLabel automation dokumentáció áttekintése;GAH iroda; 4,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 39 200 Ft 
+DAS SAE L2 LabView programkészítés 3; GAH ;2020.02.06;Cs;8:00;13:00;NiceLabel automation builder előkészítése;GAH iroda; 5,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 49 000 Ft 
+DAS SAE L2 LabView programkészítés 3; GAH ;2020.02.07;P;7:00;12:00;NiceLabel Labview prancsfájl programozás;GAH iroda; 5,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 49 000 Ft 
+DAS SAE L2 LabView programkészítés 3; GAH ;2020.02.10;H;8:00;14:00;Nyomtató baszkurálása, programos basztatás;GAH iroda; 6,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 58 800 Ft 
+DAS SAE L2 LabView programkészítés 3; GAH ;2020.02.11;K;8:00;14:00;A faszé nem működik!?;GAH iroda; 6,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 58 800 Ft 
+DAS SAE L2 LabView programkészítés 3; GAH ;2020.02.12;Sz;8:00;14:00;Vector beüzemelése előkészítése;GAH iroda; 6,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 58 800 Ft 
+DAS SAE L2 LabView programkészítés 3; GAH ;2020.02.13;Cs;8:00;14:00;Vector beüzemelése NI utánaolvasás;GAH iroda; 6,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 58 800 Ft 
+DAS SAE L2 LabView programkészítés 3; GAH ;2020.02.14;P;8:00;14:00;Megszólítás Labviewból;GAH iroda; 6,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 58 800 Ft 
+DAS SAE L2 LabView programkészítés 3; GAH ;2020.02.17;H;8:00;18:00;Phyton kód értelmezése DiagFlash;EnforSol iroda; 10,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 98 000 Ft 
+DAS SAE L2 LabView programkészítés 3; GAH ;2020.02.18;K;8:00;18:00;LabVIEW DLL próbálkozás DiagFlash;EnforSol iroda; 10,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 98 000 Ft 
+DAS SAE L2 LabView programkészítés 3; GAH ;2020.02.19;Sz;11:00;13:00;LabVIEW DiagFlash importálása Python kód átbeszélése, implementáció;EnforSol iroda; 2,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 19 600 Ft 
+Oncotherm ellenőrző ülékek; OT ;2020.02.19;Sz;14:00;15:00;Ellenőrző készülékek kézi skiccek készítése;EnforSol iroda; 1,0    ; óra ; E4S OT ; 9 947 Ft ;; 9 947 Ft ; 9 947 Ft 
+DAS SAE L2 LabView programkészítés 3; GAH ;2020.02.20;Cs;7:00;17:00;LabVIEW DiagFlash CallBack Function probléma megoldás keresés;EnforSol iroda; 10,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 98 000 Ft 
+DAS SAE L2 LabView programkészítés 3; GAH ;2020.02.21;P;8:00;12:00;LabVIEW DiagFlash CallBack Function probléma megoldás keresés;EnforSol iroda; 4,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 39 200 Ft 
+DAS SAE L2 LabView programkészítés 3; GAH ;2020.02.24;H;8:00;18:00;Python kód hívásának programozása;GAH iroda; 10,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 98 000 Ft 
+DAS SAE L2 LabView programkészítés 3; GAH ;2020.02.25;K;8:00;16:00;Design reveiwen megfogalazott igények átbeszélése;GAH iroda; 8,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 78 400 Ft 
+Oncotherm ellenőrző ülékek; OT ;2020.02.26;Sz;10:00;12:00;Első modellek elkészítése;EnforSol iroda; 2,0    ; óra ; E4S OT ; 9 947 Ft ;; 9 947 Ft ; 19 893 Ft 
+Oncotherm ellenőrző ülékek; OT ;2020.02.26;Sz;13:00;17:00;Első modellek elkészítése;EnforSol iroda; 4,0    ; óra ; E4S OT ; 9 947 Ft ;; 9 947 Ft ; 39 786 Ft 
+DAS SAE L2 LabView programkészítés 3; GAH ;2020.02.26;Sz;16:00;19:00;Flashelés programozása;GAH iroda; 3,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 29 400 Ft 
+DAS SAE L2 LabView programkészítés 3; GAH ;2020.02.27;Cs;10:00;16:00;Logfájl készítés programozása;GAH iroda; 6,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 58 800 Ft 
+Oncotherm ellenőrző ülékek; OT ;2020.03.01;V;13:00;17:00;Második készülék elkészítése;EnforSol iroda; 4,0    ; óra ; E4S OT ; 9 947 Ft ;; 9 947 Ft ; 39 786 Ft 
+DAS SAE L2 LabView programkészítés 4; GAH ;2020.03.02;H;9:00;16:00;Folyamat felépítése;GAH iroda; 7,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 68 600 Ft 
+DAS SAE L2 LabView programkészítés 4; GAH ;2020.03.03;K;9:00;16:00;Folyamat felépítése;GAH iroda; 7,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 68 600 Ft 
+DAS SAE L2 LabView programkészítés 4; GAH ;2020.03.04;Sz;8:00;16:00;Flashelés kicsinosítása;GAH iroda; 8,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 78 400 Ft 
+Oncotherm ellenőrző ülékek; OT ;2020.03.05;Cs;9:00;16:00;Második készülék elkészítése;EnforSol iroda; 7,0    ; óra ; E4S OT ; 9 947 Ft ;; 9 947 Ft ; 69 626 Ft 
+DAS SAE L2 LabView programkészítés 4; GAH ;2020.03.06;P;9:30;11:00;Design review;EnforSol iroda; 1,5    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 14 700 Ft 
+DAS SAE L2 LabView programkészítés 4; GAH ;2020.03.08;V;16:00;18:00;2 radar elkészítése, és program módosítása;EnforSol iroda; 2,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 19 600 Ft 
+Oncotherm ellenőrző ülékek; OT ;2020.03.08;V;19:00;20:00;Kis sablon modelljének javítása;EnforSol iroda; 1,0    ; óra ; E4S OT ; 9 947 Ft ;; 9 947 Ft ; 9 947 Ft 
+Oncotherm ellenőrző ülékek; OT ;2020.03.09;H;8:00;12:00;Kis sablon modelljének javítása;EnforSol iroda; 4,0    ; óra ; E4S OT ; 9 947 Ft ;; 9 947 Ft ; 39 786 Ft 
+Oncotherm ellenőrző ülékek; OT ;2020.03.09;H;13:00;17:00;Rajzkészítés;EnforSol iroda; 4,0    ; óra ; E4S OT ; 9 947 Ft ;; 9 947 Ft ; 39 786 Ft 
+Oncotherm ellenőrző ülékek; OT ;2020.03.10;K;8:00;11:00;Rajzkészítés;EnforSol iroda; 3,0    ; óra ; E4S OT ; 9 947 Ft ;; 9 947 Ft ; 29 840 Ft 
+DAS SAE L2 LabView programkészítés 4; GAH ;2020.03.10;K;12:00;15:30;Munkautasítás vetítő modul elkészítése;EnforSol iroda; 3,5    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 34 300 Ft 
+DAS SAE L2 LabView programkészítés 4; GAH ;2020.03.10;K;15:30;18:00;Munkautasítás vetítő modul elkészítése;EnforSol iroda; 2,5    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 24 500 Ft 
+DAS SAE L2 LabView programkészítés 4; GAH ;2020.03.11;Sz;8:00;14:30;Vezérélés felprogramozása;EnforSol iroda; 6,5    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 63 700 Ft 
+DAS SAE L2 LabView programkészítés NF; GAH ;2020.03.12;Cs;8:00;16:00;Vezérélés felprogramozása;EnforSol iroda; 8,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 78 400 Ft 
+DAS SAE L2 LabView programkészítés NF; GAH ;2020.03.13;P;8:00;16:00;Vezérélés felprogramozása;EnforSol iroda; 8,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 78 400 Ft 
+DAS SAE L2 LabView programkészítés NF; GAH ;2020.03.14;Szo;12:00;16:00;Vezérélés felprogramozása;EnforSol iroda; 4,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 39 200 Ft 
+DAS SAE L2 LabView programkészítés NF; GAH ;2020.03.16;H;16:30;18:30;Vezérélés felprogramozása;EnforSol iroda; 2,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 19 600 Ft 
+DAS SAE L2 LabView programkészítés NF; GAH ;2020.03.17;K;10:00;15:00;Vezérélés felprogramozása;EnforSol iroda; 5,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 49 000 Ft 
+DAS SAE L2 LabView programkészítés NF; GAH ;2020.03.18;Sz;10:00;18:00;Vezérélés felprogramozása;EnforSol iroda; 8,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 78 400 Ft 
+DAS SAE L2 LabView programkészítés NF; GAH ;2020.03.19;Cs;10:00;18:00;Vezérélés felprogramozása;EnforSol iroda; 8,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 78 400 Ft 
+DAS SAE L2 LabView programkészítés NF; GAH ;2020.03.20;P;10:00;18:00;Vezérélés felprogramozása;EnforSol iroda; 8,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 78 400 Ft 
+DAS SAE L2 LabView programkészítés NF; GAH ;2020.03.23;H;10:00;18:00;Vezérélés felprogramozása;EnforSol iroda; 8,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 78 400 Ft 
+DAS SAE L2 LabView programkészítés NF; GAH ;2020.03.24;K;10:00;18:00;Vezérélés felprogramozása;EnforSol iroda; 8,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 78 400 Ft 
+DAS SAE L2 LabView programkészítés NF; GAH ;2020.03.25;Sz;10:00;18:00;Vezérélés felprogramozása;EnforSol iroda; 8,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 78 400 Ft 
+DAS SAE L2 LabView programkészítés NF; GAH ;2020.03.26;Cs;10:00;18:00;Vezérélés felprogramozása;EnforSol iroda; 8,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 78 400 Ft 
+DAS SAE L2 software doksi; GAH ;2020.03.27;P;8:00;18:00;Doksikészítés;EnforSol iroda; 10,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 65 000 Ft 
+DAS SAE L2 software doksi; GAH ;2020.03.28;Szo;8:00;18:00;Doksikészítés;EnforSol iroda; 10,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 65 000 Ft 
+DAS SAE L2 teszt; GAH ;2020.03.30;H;8:00;18:00;Tesztelés;EnforSol iroda; 10,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 65 000 Ft 
+DAS SAE L2 teszt; GAH ;2020.03.31;K;8:00;18:00;Tesztelés;EnforSol iroda; 10,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 65 000 Ft 
+DAS SAE L2 LabView programkészítés NF; GAH ;2020.04.01;Sz;9:00;13:00;Szerelés;EnforSol iroda; 4,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 39 200 Ft 
+DAS SAE L2 LabView programkészítés NF; GAH ;2020.04.02;Cs;8:00;16:00;Vezérélés felprogramozása;EnforSol iroda; 8,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 78 400 Ft 
+DAS SAE L2 LabView programkészítés NF; GAH ;2020.04.03;P;8:00;16:00;Vezérélés felprogramozása;EnforSol iroda; 8,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 78 400 Ft 
+DAS SAE L2 LabView programkészítés NF; GAH ;2020.04.04;Szo;10:00;15:00;Vezérélés felprogramozása;EnforSol iroda; 5,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 49 000 Ft 
+Kutyacsont 2.0; GAH ;2020.04.13;H;8:00;9:00;Kameratartó és ülék koncepció;EnforSol iroda; 1,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 6 500 Ft 
+Kutyacsont 2.0; GAH ;2020.04.14;K;8:00;9:00;Kameratartó és ülék koncepció;EnforSol iroda; 1,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 6 500 Ft 
+Kutyacsont 2.0; GAH ;2020.04.15;Sz;8:00;10:00;Kameratartó és ülék koncepció;EnforSol iroda; 2,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 13 000 Ft 
+REST API test Postman LabVIEW; GAH ;2020.04.16;Cs;13:00;14:30;Egyeztetés C++ programozó Szél Péterrel;EnforSol iroda; 1,5    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 14 700 Ft 
+REST API test Postman LabVIEW; GAH ;2020.04.17;P;7:00;11:30;Kalkuláció készítés, tápegység kiválasztása;EnforSol iroda; 4,5    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 44 100 Ft 
+REST API test Postman LabVIEW; GAH ;2020.04.17;P;13:00;15:00;Postman teszt végrehajtása;EnforSol iroda; 2,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 19 600 Ft 
+REST API test Postman LabVIEW; GAH ;2020.04.20;H;10:00;18:00;Postman teszt végrehajtása;EnforSol iroda; 8,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 78 400 Ft 
+DAS SAE L2 software doksi; GAH ;2020.04.21;K;15:00;17:00;Doksikészítés;EnforSol iroda; 2,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 13 000 Ft 
+Kutyacsont 2.0; GAH ;2020.04.21;K;11:00;17:00;Rajzellenőrzés;EnforSol iroda; 6,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 39 000 Ft 
+DAS SAE L2 Keyence teszt; GAH ;2020.04.21;K;10:00;13:00;Tesztelés kódolvasóval;EnforSol iroda; 3,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 19 500 Ft 
+APAS Lego teszt; GAH ;2020.04.21;K;13:00;16:00;Kaméleon megfogó tesztelése, 3 ujjas robot megfogó tesztelése;EnforSol iroda; 3,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 19 500 Ft 
+DAS SAE L2 Keyence teszt; GAH ;2020.04.22;Sz;9:00;14:00;Tesztelés kódolvasóval;EnforSol iroda; 5,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 32 500 Ft 
+VAD mérés tervezése; Hauni ;2020.05.07;Cs;15:00;16:00;Dokumentáció áttekintése;EnforSol iroda; 1,0    ; óra ; HAUNI 2020 ; 7 800 Ft ;; 7 800 Ft ; 7 800 Ft 
+VAD mérés tervezése; Hauni ;2020.05.07;Cs;17:00;18:00;Megbeszélés Szilágyi Tiborral;EnforSol iroda; 1,0    ; óra ; HAUNI 2020 ; 7 800 Ft ;; 7 800 Ft ; 7 800 Ft 
+VAD mérés tervezése; Hauni ;2020.05.08;P;8:00;13:30;Tervek kidolgozása;EnforSol iroda; 5,5    ; óra ; HAUNI 2020 ; 7 800 Ft ;; 7 800 Ft ; 42 900 Ft 
+Pneumatikus rajz készítés; GAH ;2020.05.11;H;8:00;12:00;Rajz készítés;EnforSol iroda; 4,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 26 000 Ft 
+Hirtenberger K3 csatlakozóház; GAH ;2020.05.14;Cs;8:00;16:00;Árajánlat készítése;EnforSol iroda; 8,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 52 000 Ft 
+Getangesteller; SPR ;2020.05.22;P;10:00;12:00;Árajánlatok bekérése, internetes keresés emelők és zsámolyok után;EnforSol iroda; 2,0    ; óra ; SPR 18/2 ; 5 500 Ft ;; 5 500 Ft ; 11 000 Ft 
+Getangesteller; SPR ;2020.05.25;H;10:00;14:00;Árajánlatok bekérése gépmozgató cégektől, darabjegyzék és modell áttekintése.;EnforSol iroda; 4,0    ; óra ; SPR 18/2 ; 5 500 Ft ;; 5 500 Ft ; 22 000 Ft 
+Getangesteller; SPR ;2020.05.26;K;8:00;15:00;Szabvány áttekintése, emelőszem és emelés méretezése, szem kiválasztása;EnforSol iroda; 7,0    ; óra ; SPR 18/2 ; 5 500 Ft ;; 5 500 Ft ; 38 500 Ft 
+Getangesteller; SPR ;2020.05.27;Sz;8:00;10:00;Modellek elkészítése emeléshez;EnforSol iroda; 2,0    ; óra ; SPR 18/2 ; 5 500 Ft ;; 5 500 Ft ; 11 000 Ft 
+Apas robot billentyűzet kísérlet; GAH ;2020.05.27;Sz;10:00;15:00;Megfogó méretezése, info Bosch-tól;EnforSol iroda; 5,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 32 500 Ft 
+VAD mérés tervezése; Hauni ;2020.05.27;Sz;15:00;16:30;Megbeszélés Kettelnhöhn-nel;EnforSol iroda; 1,5    ; óra ; HAUNI 2020 ; 7 800 Ft ;; 7 800 Ft ; 11 700 Ft 
+Hirtenberger K3 csatlakozóház; GAH ;2020.05.27;Sz;12:30;14:00;Árajánlat módosítása Biharival egyeztetés után;EnforSol iroda; 1,5    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 9 750 Ft 
+Hirtenberger K3 csatlakozóház; GAH ;2020.05.28;Cs;9:00;11:30;Projektlefutás és mennyiségi kedvezmény;EnforSol iroda; 2,5    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 16 250 Ft 
+VAD mérés tervezése; Hauni ;2020.05.28;Cs;8:00;16:00;Dokumentum részletesebb kidolgozása, és módosítása;EnforSol iroda; 8,0    ; óra ; HAUNI 2020 ; 7 800 Ft ;; 7 800 Ft ; 62 400 Ft 
+Apas robot billentyűzet kísérlet; GAH ;2020.05.29;P;8:00;15:00;Számítások a megfogóról, mozgáspróba;EnforSol iroda; 7,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 45 500 Ft 
+VAD mérés tervezése; Hauni ;2020.05.29;P;8:00;9:00;Dokumentum további módosításai;EnforSol iroda; 1,0    ; óra ; HAUNI 2020 ; 7 800 Ft ;; 7 800 Ft ; 7 800 Ft 
+Pneumatikus rajz készítés; GAH ;2020.05.31;V;8:00;9:00;Rajz készítés;EnforSol iroda; 1,0    ; darab ; 24VDC tép ; 12 000 Ft ; 24VDC tép ; 12 000 Ft ; 12 000 Ft 
+Pneumatikus rajz készítés; GAH ;2020.05.31;V;8:00;9:00;Rajz készítés;EnforSol iroda; 1,0    ; darab ; 3/2 szelep ; 16 000 Ft ; 3/2 szelep ; 16 000 Ft ; 16 000 Ft 
+Kutyacsont 2.0 Step2; GAH ;2020.06.02;K;8:00;10:00;Ülék szerelés, robot intézése, keráruk beszerzése;EnforSol iroda; 2,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 13 000 Ft 
+VAD mérés tervezése; Hauni ;2020.06.02;K;11:00;13:00;Megbeszélés Kettelnhöhn-nel;EnforSol iroda; 2,0    ; óra ; HAUNI 2020 ; 7 800 Ft ;; 7 800 Ft ; 15 600 Ft 
+Robot elhozása Kontaktelektrotól, beüzemelés; GAH ;2020.06.03;Sz;7:30;9:30;Robot elszállítása, beüzemelése, robot nem működik;EnforSol iroda; 2,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 13 000 Ft 
+Robot elhozása Kontaktelektrotól, beüzemelés; GAH ;2020.06.03;Sz;10:30;15:30;Robot beüzemelése, sznevedés, robot nem működik;EnforSol iroda; 5,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 32 500 Ft 
+DAS SAE L2 tailoring árajánlat; GAH ;2020.06.03;Sz;9:30;10:30;Árajánlat készítése;EnforSol iroda; 1,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 6 500 Ft 
+DAS SAE L2 tailoring árajánlat; GAH ;2020.06.08;H;9:00;10:00;Megbeszélés;EnforSol iroda; 1,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 6 500 Ft 
+Robot elhozása Kontaktelektrotól, beüzemelés; GAH ;2020.06.08;H;12:30;16:30;Robot beüzemelése, sznevedés, biztosíték futár, fórumok áttúrása;EnforSol iroda; 4,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 26 000 Ft 
+Keyence kamera beüzemelés; GAH ;2020.06.09;K;8:00;16:30;Kamera vezérlő nem működik;EnforSol iroda; 8,5    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 55 250 Ft 
+Keyence kamera beüzemelés; GAH ;2020.06.10;Sz;8:00;15:30;Kamera vezérlő nem működik, memóriakártya hiba okozta;EnforSol iroda; 7,5    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 48 750 Ft 
+DAS SAE L2 tailoring árajánlat; GAH ;2020.06.10;Sz;15:30;16:00;Megbeszélés;EnforSol iroda; 0,5    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 3 250 Ft 
+Kutyacsont 2.0 Step2; GAH ;2020.06.10;Sz;17:00;20:00;Kamerarendszer beállítása, fókuszpont bemérése;EnforSol iroda; 3,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 19 500 Ft 
+DAS SAE L2 tailoring árajánlat; GAH ;2020.06.11;Cs;8:00;10:00;C# teszt készítése eszközzel;EnforSol iroda; 2,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 13 000 Ft 
+Kutyacsont 2.0 Step2; GAH ;2020.06.11;Cs;10:00;17:00;Kamerarendszer beállítása, fókuszpont bemérése;EnforSol iroda; 7,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 45 500 Ft 
+Légrádi Nóra - LifeCoach honlap; LN ;2020.06.11;Cs;19:00;0:00;Kamerarendszer beállítása, fókuszpont bemérése;EnforSol iroda; 5,0    ; óra ; Webfejleszés kezdő ; 5 000 Ft ;; 5 000 Ft ; 25 000 Ft 
+Kutyacsont 2.0 Step2; GAH ;2020.06.12;P;13:00;14:00;Kamerarendszer beállítása, fókuszpont bemérése;EnforSol iroda; 1,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 6 500 Ft 
+Bacsó WebShop; NYBÁ ;2020.06.12;P;14:30;16:30;CSS rendberakása;EnforSol iroda; 2,0    ; óra ; Webfejleszés kezdő ; 5 000 Ft ;; 5 000 Ft ; 10 000 Ft 
+Légrádi Nóra - LifeCoach honlap; LN ;2020.06.12;P;20:00;21:00;Kamerarendszer beállítása, fókuszpont bemérése;EnforSol iroda; 1,0    ; óra ; Webfejleszés kezdő ; 5 000 Ft ;; 5 000 Ft ; 5 000 Ft 
+Légrádi Nóra - LifeCoach honlap; LN ;2020.06.13;Szo;9:00;15:00;Kamerarendszer beállítása, fókuszpont bemérése;EnforSol iroda; 6,0    ; óra ; Webfejleszés kezdő ; 5 000 Ft ;; 5 000 Ft ; 30 000 Ft 
+Légrádi Nóra - LifeCoach honlap; LN ;2020.06.15;H;10:30;11:30;Képel, színek, betűtípusok variálása;EnforSol iroda; 1,0    ; óra ; Webfejleszés kezdő ; 5 000 Ft ;; 5 000 Ft ; 5 000 Ft 
+Kutyacsont 2.0 Step2; GAH ;2020.06.15;H;9:00;16:00;Kamerarendszer beállítása, fókuszpont bemérése;EnforSol iroda; 7,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 45 500 Ft 
+Kutyacsont 2.0 Step2; GAH ;2020.06.16;K;9:00;11:00;Kamerarendszer beállítása, fókuszpont bemérése;EnforSol iroda; 2,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 13 000 Ft 
+Magnatech; GAH ;2020.06.17;Sz;9:00;17:00;Perdület megmaradás számítása forgóasztalra;EnforSol iroda; 8,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 52 000 Ft 
+Kutyacsont 2.0 Step2; GAH ;2020.06.17;Sz;8:00;12:00;Koordináta transzformációk Inventorral, számítással;EnforSol iroda; 4,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 26 000 Ft 
+Magnatech; GAH ;2020.06.18;Cs;8:00;16:00;Perdület megmaradás számítása forgóasztalra, szükséges fékező nyomaték;EnforSol iroda; 8,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 52 000 Ft 
+Légrádi Nóra - LifeCoach honlap; LN ;2020.06.22;H;9:00;14:00;Tartalom feltöltés;EnforSol iroda; 5,0    ; óra ; Webfejleszés kezdő ; 5 000 Ft ;; 5 000 Ft ; 25 000 Ft 
+Légrádi Nóra - LifeCoach honlap; LN ;2020.06.22;H;15:30;16:00;Színezés;EnforSol iroda; 0,5    ; óra ; Webfejleszés kezdő ; 5 000 Ft ;; 5 000 Ft ; 2 500 Ft 
+Légrádi Nóra - LifeCoach honlap; LN ;2020.06.22;H;19:00;21:00;Színezés;EnforSol iroda; 2,0    ; óra ; Webfejleszés kezdő ; 5 000 Ft ;; 5 000 Ft ; 10 000 Ft 
+Légrádi Nóra - LifeCoach honlap; LN ;2020.06.23;K;8:00;11:00;Színezés;EnforSol iroda; 3,0    ; óra ; Webfejleszés kezdő ; 5 000 Ft ;; 5 000 Ft ; 15 000 Ft 
+Kutyacsont 2.0 Step2; GAH ;2020.06.23;K;12:00;16:00;Újramérés, atadok kiértékelése;EnforSol iroda; 4,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 26 000 Ft 
+Kutyacsont 2.0 Step2; GAH ;2020.06.24;Sz;8:00;16:00;Adatok kiértékelése, és másik alkatrész mérése;EnforSol iroda; 8,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 52 000 Ft 
+Légrádi Nóra - LifeCoach honlap; LN ;2020.06.23;K;18:00;20:00;Scriptek;EnforSol iroda; 2,0    ; óra ; Webfejleszés kezdő ; 5 000 Ft ;; 5 000 Ft ; 10 000 Ft 
+Légrádi Nóra - LifeCoach honlap; LN ;2020.06.24;Sz;10:00;11:00;Tartalom javítása;EnforSol iroda; 1,0    ; óra ; Webfejleszés kezdő ; 5 000 Ft ;; 5 000 Ft ; 5 000 Ft 
+Légrádi Nóra - LifeCoach honlap; LN ;2020.06.25;Cs;10:00;16:00;Loader képernyő, scrollax;EnforSol iroda; 6,0    ; óra ; Webfejleszés kezdő ; 5 000 Ft ;; 5 000 Ft ; 30 000 Ft 
+Légrádi Nóra - LifeCoach honlap; LN ;2020.06.27;Szo;10:00;16:00;SEO;EnforSol iroda; 6,0    ; óra ; Webfejleszés kezdő ; 5 000 Ft ;; 5 000 Ft ; 30 000 Ft 
+Légrádi Nóra - LifeCoach honlap; LN ;2020.06.28;V;10:00;16:00;SEO;EnforSol iroda; 6,0    ; óra ; Webfejleszés kezdő ; 5 000 Ft ;; 5 000 Ft ; 30 000 Ft 
+Kutyacsont 2.0 Step2; GAH ;2020.06.29;H;8:00;16:00;Riport készítés;EnforSol iroda; 8,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 52 000 Ft 
+Getangesteller szerelés; SPR ;2020.06.30;K;8:00;16:00;Szerelés;EnforSol iroda; 8,0    ; óra ; SPR 18/2 ; 5 500 Ft ;; 5 500 Ft ; 44 000 Ft 
+Kis szállítószalag; GAH ;2020.06.30;K;18:00;21:00;Hátsó akna tervezése;EnforSol iroda; 3,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 19 500 Ft 
+Kis szállítószalag; GAH ;2020.07.01;Sz;8:00;16:00;Pálya átalakítása és első akna tervezése;EnforSol iroda; 8,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 52 000 Ft 
+Kis szállítószalag; GAH ;2020.07.02;Cs;8:00;12:00;Részlettervezés;EnforSol iroda; 4,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 26 000 Ft 
+Billentyűzet kamerás mérés; GAH ;2020.07.02;Cs;10:00;15:00;Robot tárgyasztal és szerszám bemérése, szerszám bemérése, átalakítás;EnforSol iroda; 5,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 32 500 Ft 
+Billentyűzet kamerás mérés; GAH ;2020.07.06;H;14:00;17:00;Kamera tanítása;EnforSol iroda; 3,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 19 500 Ft 
+Billentyűzet kamerás mérés; GAH ;2020.07.07;K;8:00;15:00;Mérések végzése, és konzultáció Biszku Leventével;EnforSol iroda; 7,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 45 500 Ft 
+Kis szállítószalag 2; GAH ;2020.07.07;K;8:00;10:00;Gép átalakítása;EnforSol iroda; 2,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 13 000 Ft 
+Kis szállítószalag 2; GAH ;2020.07.08;Sz;9:00;10:00;Gép átalakítása;EnforSol iroda; 1,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 6 500 Ft 
+DAS SAE L2 tailoring árajánlat; GAH ;2020.07.08;Sz;13:00;14:00;Megbeszélés;EnforSol iroda; 1,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 6 500 Ft 
+Billentyűzet kamerás mérés; GAH ;2020.07.08;Sz;10:00;12:00;Mérési eredmények kiértékelése;EnforSol iroda; 2,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 13 000 Ft 
+Billentyűzet kamerás mérés; GAH ;2020.07.08;Sz;14:00;16:00;Mérési eredmények kiértékelése;EnforSol iroda; 2,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 13 000 Ft 
+Billentyűzet kamerás mérés; GAH ;2020.07.09;Cs;8:00;11:30;Mérési eredmények kiértékelése;EnforSol iroda; 3,5    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 22 750 Ft 
+Billentyűzet kamerás mérés; GAH ;2020.07.09;Cs;13:00;13:30;Új mérések billentyűk egymáshoz képesti viszonyai;EnforSol iroda; 0,5    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 3 250 Ft 
+Kutyacsont 2.0 Step3; GAH ;2020.07.09;Cs;13:30;14:30;Kísérletezgetés, rajzellenőrzés;EnforSol iroda; 1,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 6 500 Ft 
+VAD mérés tervezése; Hauni ;2020.07.09;Cs;14:30;15:30;Rugók és töegek számítása;EnforSol iroda; 1,0    ; óra ; HAUNI 2020 ; 7 800 Ft ;; 7 800 Ft ; 7 800 Ft 
+Kutyacsont 2.0 Step3; GAH ;2020.07.10;P;8:00;12:00;Mérési eredmények újra értékelése, és riport készítés;EnforSol iroda; 4,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 26 000 Ft 
+DAS SAE L2 tailoring teszt; GAH ;2020.07.13;H;8:00;14:00;Wrapper teszt és labortáp VI teszt;EnforSol iroda; 6,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 58 800 Ft 
+Kutyacsont 2.0 Step3; GAH ;2020.07.13;H;14:30;17:30;Kutyacsont megoldási lehetőségek kutatása;EnforSol iroda; 3,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 19 500 Ft 
+DAS SAE L2 tailoring teszt; GAH ;2020.07.14;K;8:00;10:00;Wrapper teszt 1.1 és labortáp VI-ok átnézése;EnforSol iroda; 2,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 19 600 Ft 
+Kutyacsont 2.0 Step3; GAH ;2020.07.14;K;10:30;12:30;Ülék elhozatal;EnforSol iroda; 2,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 13 000 Ft 
+Simulink oktatás; GAH ;2020.07.14;K;14:00;17:00;Matlab oktatás;EnforSol iroda; 3,0    ; óra ; Okulás ; 4 000 Ft ;; 4 000 Ft ; 12 000 Ft 
+Kutyacsont 2.0 Step3; GAH ;2020.07.15;Sz;9:00;12:00;Ülék újbóli bemérése;EnforSol iroda; 3,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 19 500 Ft 
+Kutyacsont 2.0 Step3; GAH ;2020.07.15;Sz;14:00;18:00;Optikai teszt és bemérés eredménye;EnforSol iroda; 4,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 26 000 Ft 
+Kutyacsont 2.0 Step3; GAH ;2020.07.16;Cs;9:00;15:00;Kamera tanítás, újra és újra bemérés;EnforSol iroda; 6,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 39 000 Ft 
+DAS SAE L2 tailoring árajánlat; GAH ;2020.07.17;P;9:00;11:00;Megbeszélés Szél Péterrel a Wrapper használatáról;EnforSol iroda; 2,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 13 000 Ft 
+Présszerszám átalakítás; GAH ;2020.07.17;P;9:00;11:00;Tervezés;EnforSol iroda; 2,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 13 000 Ft 
+Kutyacsont 2.0 Step3; GAH ;2020.07.20;H;9:00;12:00;Mérés elvégzése 1-es mintán;EnforSol iroda; 3,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 19 500 Ft 
+Présszerszám átalakítás; GAH ;2020.07.20;H;12:30;14:30;Tervezés konzultáció;EnforSol iroda; 2,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 13 000 Ft 
+CCA LabVIEW koncepció és árajánlat; GAH ;2020.07.21;K;8:30;12:00;Koncepció kidolgozása;EnforSol iroda; 3,5    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 22 750 Ft 
+CCA LabVIEW koncepció és árajánlat; GAH ;2020.07.21;K;13:00;17:30;Koncepció kidolgozása;EnforSol iroda; 4,5    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 29 250 Ft 
+Kutyacsont 2.0 Step3; GAH ;2020.07.21;K;17:30;18:30;Mérés eredmények kiértékelése;EnforSol iroda; 1,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 6 500 Ft 
+Kutyacsont 2.0 Step3; GAH ;2020.07.22;Sz;7:00;8:00;Mérés eredmények kiértékelése, összefoglalása;EnforSol iroda; 1,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 6 500 Ft 
+DAS SAE L2 tailoring árajánlat; GAH ;2020.07.22;Sz;9:00;11:00;Flashelés Píthonból tesztelés új Diagflasshel;EnforSol iroda; 2,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 13 000 Ft 
+Kutyacsont 2.0 Step3; GAH ;2020.07.22;Sz;11:30;13:00;Mérés eredmények kiértékelése, összefoglalása;EnforSol iroda; 1,5    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 9 750 Ft 
+DAS SAE L2 tailoring árajánlat; GAH ;2020.07.22;Sz;13:00;16:30;WinDebug logok legyártása;EnforSol iroda; 3,5    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 22 750 Ft 
+Kutyacsont 2.0 Step3; GAH ;2020.07.23;Cs;9:00;12:00;2-es minta újramérése;EnforSol iroda; 3,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 19 500 Ft 
+Kutyacsont 2.0 Step3; GAH ;2020.07.23;Cs;13:00;18:00;3-as, 4-es minta újramérése és Keyence elcsomagolása, Robot visszaszerelése;EnforSol iroda; 5,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 32 500 Ft 
+Kutyacsont 2.0 Step3; GAH ;2020.07.24;P;8:00;12:00;Riportkészítés;EnforSol iroda; 4,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 26 000 Ft 
+Ragasztó állomás; KM ;2020.07.24;P;13:00;15:00;Árajánlatkészítése;EnforSol iroda; 2,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 19 600 Ft 
+Context.hu rendbetétele; Lab NKft. ;2020.07.27;H;18:00;20:00;Árajánalthoz infók, WP content importálása;EnforSol iroda; 2,0    ; óra ; Webfejleszés kezdő ; 5 000 Ft ;; 5 000 Ft ; 10 000 Ft 
+Kutyacsont 2.0 Step3; GAH ;2020.07.28;K;8:00;10:00;Robot elszállítása és riportkészítés;EnforSol iroda; 2,0    ; óra ; GAH2020 ; 6 500 Ft ;; 6 500 Ft ; 13 000 Ft 
+Context.hu rendbetétele; Lab NKft. ;2020.07.28;K;11:00;17:00;Régebbi backupok letöltése;EnforSol iroda; 6,0    ; óra ; Webfejleszés kezdő ; 5 000 Ft ;; 5 000 Ft ; 30 000 Ft 
+DAS SAE L2 tailoring teszt; GAH ;2020.07.28;K;13:00;15:00;Diagflash 6.15.12.10 tesztelése;EnforSol iroda; 2,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 19 600 Ft 
+Ragasztó állomás; KM ;2020.07.29;Sz;10:00;11:00;Új árajánlatkészítése;EnforSol iroda; 1,0    ; óra ; GAH LV Prg 19 ; 9 800 Ft ;; 9 800 Ft ; 9 800 Ft 
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;

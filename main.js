@@ -1,0 +1,149 @@
+class dataTable {
+  constructor(parameters) {
+    this.datafile = parameters.datafile;
+    //this.data = [];
+  }
+
+  init() {
+    console.log(this.readData());
+    //visualizeData(header, rows);
+  }
+
+  readData() {
+    async function fetchData() {
+      let response = await fetch(parameters.datafile);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      } else {
+        return await response.blob();
+      }
+    }
+
+    fetchData()
+      .then((blob) => {
+        console.log(blob);
+      })
+      .catch((e) => console.log(e));
+  }
+
+  processData() {
+    let allLines = this.data.split(/\r\n|\n/);
+    let header = allLines.shift().split(";");
+
+    let linesNr = allLines.length;
+
+    let rows = [];
+
+    for (let line of allLines) {
+      rows.push(line.split(";"));
+    }
+  }
+
+  replaceAll(string, search, replace) {
+    return string.split(search).join(replace);
+  }
+
+  visualizeData(header, rows) {
+    let table = createTable();
+    createHeader(table, header);
+    createRows(table, rows, header);
+  }
+
+  noSpecChars(text, lowercase = true) {
+    const SpecChars = [
+      "é",
+      "á",
+      "ű",
+      "ő",
+      "ú",
+      "ü",
+      "ó",
+      "ö",
+      "í",
+      " ",
+      "  ",
+      "É",
+      "Á",
+      "Ű",
+      "Ö",
+      "Ú",
+      "Ü",
+      "Ó",
+      "Ö",
+      "Í",
+    ];
+    const equalChars = [
+      "e",
+      "a",
+      "u",
+      "o",
+      "u",
+      "u",
+      "o",
+      "o",
+      "i",
+      "_",
+      " ",
+      "E",
+      "A",
+      "U",
+      "O",
+      "U",
+      "U",
+      "O",
+      "O",
+      "I",
+      "_",
+      " ",
+    ];
+    for (let i = 0; i < SpecChars.length; i++) {
+      text = replaceAll(text, SpecChars[i], equalChars[i]);
+    }
+    return lowercase ? text.toLowerCase() : text;
+  }
+
+  createTable() {
+    const table = document.createElement("table");
+    table.classList.add("dataTable");
+    document.body.appendChild(table);
+    return table;
+  }
+
+  createHeader(table, header) {
+    const tblHead = document.createElement("tr");
+    tblHead.classList.add("header");
+    table.appendChild(tblHead);
+    i = 0;
+    for (let col of header) {
+      let headerRow = document.createElement("th");
+      let colName = noSpecChars(col);
+      headerRow.classList.add(colName);
+      headerRow.innerHTML = col;
+      tblHead.appendChild(headerRow);
+      i++;
+    }
+  }
+
+  createRows(table, rows, header) {
+    let i = 0;
+    for (let row of rows) {
+      let tblRow = document.createElement("tr");
+      tblRow.classList.add("row-" + i);
+      table.appendChild(tblRow);
+      i++;
+      j = 0;
+      for (let col of row) {
+        let tblCol = document.createElement("td");
+        let colName = noSpecChars(header[j]);
+        tblCol.classList.add(colName);
+        tblCol.innerHTML = col;
+        tblRow.appendChild(tblCol);
+        j++;
+      }
+    }
+  }
+}
+
+let booking = new dataTable({ datafile: "booking.csv" });
+booking.init();
+//console.log(booking);

@@ -1,0 +1,44 @@
+table {
+  border-collapse: collapse;
+}
+
+th {
+  background-color: #111;
+  color: #ccc;
+}
+td {
+  padding: 2px;
+}
+tr {
+  border: 1px solid #eee;
+}
+tr:nth-child(2n) td:nth-child(2n) {
+  background-color: #eee;
+}
+tr:nth-child(2n) td:nth-child(2n + 1) {
+  background-color: #e8e8e8;
+}
+tr:nth-child(2n + 1) td:nth-child(2n) {
+  background-color: #e8e8e8;
+}
+tr:nth-child(2n + 1) td:nth-child(2n + 1) {
+  background-color: #eee;
+}
+tr:nth-child(2n) td:nth-child(2n):hover {
+  background-color: #ddd;
+}
+tr:nth-child(2n) td:nth-child(2n + 1):hover {
+  background-color: #ddd;
+}
+tr:nth-child(2n + 1) td:nth-child(2n):hover {
+  background-color: #ddd;
+}
+tr:nth-child(2n + 1) td:nth-child(2n + 1):hover {
+  background-color: #ddd;
+}
+
+tr:hover {
+  background-color: #ddd;
+  box-shadow: 1px 2px 5px gray !important;
+  border: 1px solid gray !important;
+}
