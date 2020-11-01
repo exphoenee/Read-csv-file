@@ -1,42 +1,62 @@
 class dataTable {
   constructor(parameters) {
     this.datafile = parameters.datafile;
-    //this.data = [];
+    this.rawData = "";
+    this.dataCSV = "text/plain";
+    this.dataJSON = "application/json";
+    this.table = {
+      header: [],
+      rowNumber: null,
+      rows: [],
+    };
   }
 
   init() {
-    console.log(this.readData());
-    //visualizeData(header, rows);
+    let that = this;
+    this.sendRequest(
+      function (CSVdata) {
+        //console.log(CSVdata);
+        that.rawData = CSVdata;
+      },
+      this.datafile,
+      "GET",
+      false
+    );
+    this.processData(this.rawData);
   }
 
-  readData() {
-    async function fetchData() {
-      let response = await fetch(parameters.datafile);
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      } else {
-        return await response.blob();
-      }
-    }
+  sendRequest(
+    callback,
+    url,
+    method = "GET",
+    async = true,
+    body = null,
+    header = "text/plain"
+  ) {
+    let xhr = new XMLHttpRequest();
 
-    fetchData()
-      .then((blob) => {
-        console.log(blob);
-      })
-      .catch((e) => console.log(e));
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        callback(xhr.responseText);
+      }
+    };
+    xhr.open(method, url, async);
+    xhr.setRequestHeader("Content-Type", header);
+    xhr.send(body);
   }
 
   processData() {
-    let allLines = this.data.split(/\r\n|\n/);
+    let allLines = this.rawData.split(/\r\n|\n/);
     let header = allLines.shift().split(";");
 
-    let linesNr = allLines.length;
-
-    let rows = [];
+    this.table.header = header;
+    this.table.rowNumber = allLines.length;
 
     for (let line of allLines) {
-      rows.push(line.split(";"));
+      this.table.rows.push(line.split(";"));
     }
+
+    this.visualizeData(this.table.header, this.table.rows);
   }
 
   replaceAll(string, search, replace) {
@@ -44,13 +64,13 @@ class dataTable {
   }
 
   visualizeData(header, rows) {
-    let table = createTable();
-    createHeader(table, header);
-    createRows(table, rows, header);
+    let table = this.createTable();
+    this.createHeader(table, header);
+    this.createRows(table, rows, header);
   }
 
   noSpecChars(text, lowercase = true) {
-    const SpecChars = [
+    const specChars = [
       "é",
       "á",
       "ű",
@@ -61,7 +81,6 @@ class dataTable {
       "ö",
       "í",
       " ",
-      "  ",
       "É",
       "Á",
       "Ű",
@@ -83,7 +102,6 @@ class dataTable {
       "o",
       "i",
       "_",
-      " ",
       "E",
       "A",
       "U",
@@ -93,11 +111,9 @@ class dataTable {
       "O",
       "O",
       "I",
-      "_",
-      " ",
     ];
-    for (let i = 0; i < SpecChars.length; i++) {
-      text = replaceAll(text, SpecChars[i], equalChars[i]);
+    for (let [i, char] of specChars.entries()) {
+      text = this.replaceAll(text, char, equalChars[i]);
     }
     return lowercase ? text.toLowerCase() : text;
   }
@@ -113,32 +129,27 @@ class dataTable {
     const tblHead = document.createElement("tr");
     tblHead.classList.add("header");
     table.appendChild(tblHead);
-    i = 0;
-    for (let col of header) {
+    for (let [i, col] of header.entries()) {
       let headerRow = document.createElement("th");
-      let colName = noSpecChars(col);
+      let colName = this.noSpecChars(col);
       headerRow.classList.add(colName);
       headerRow.innerHTML = col;
       tblHead.appendChild(headerRow);
-      i++;
     }
   }
 
   createRows(table, rows, header) {
-    let i = 0;
-    for (let row of rows) {
+    for (let [i, row] of rows.entries()) {
       let tblRow = document.createElement("tr");
+      //console.log(row + ": " + i);
       tblRow.classList.add("row-" + i);
       table.appendChild(tblRow);
-      i++;
-      j = 0;
-      for (let col of row) {
+      for (let [j, col] of row.entries()) {
         let tblCol = document.createElement("td");
-        let colName = noSpecChars(header[j]);
+        let colName = this.noSpecChars(header[j]);
         tblCol.classList.add(colName);
         tblCol.innerHTML = col;
         tblRow.appendChild(tblCol);
-        j++;
       }
     }
   }

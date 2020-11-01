@@ -1,10 +1,13 @@
 table {
   border-collapse: collapse;
+  position: relative;
 }
 
 th {
   background-color: #111;
   color: #ccc;
+  position: sticky;
+  top: 0;
 }
 td {
   padding: 2px;

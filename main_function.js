@@ -6,7 +6,30 @@ function readTextFile(file, whatToDo) {
   });
 }
 
-readTextFile("booking.csv", processData);
+function sendRequest(
+  callback,
+  url,
+  method = "GET",
+  async = true,
+  body = null,
+  header = null
+) {
+  let xhr = new XMLHttpRequest();
+
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      let data = xhr.responseText;
+      callback(data);
+    }
+  };
+
+  xhr.open(method, url, async);
+  xhr.send(body);
+}
+
+//readTextFile("booking.csv", processData);
+
+sendRequest(processData, "booking.csv");
 
 function processData(allText) {
   let allLines = allText.split(/\r\n|\n/);
