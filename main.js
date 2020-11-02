@@ -2,11 +2,7 @@ class dataTable {
   constructor(parameters) {
     this.datafile = parameters.datafile;
     this.container = document.querySelector("." + parameters.containerID);
-    this.table = {
-      header: {},
-      body: [{}],
-      rowNumber: null,
-      rows: {},
+    this.settings = {
       columnsToSummarize: ["munkaertek", "mennyiseg"],
       currencyNames: ["Ft", "EUR", "USD", "HUF", "CHF"],
       specialChars: {
@@ -30,6 +26,13 @@ class dataTable {
         Ű: "U",
         Í: "I",
       },
+    };
+    this.table = {
+      header: {},
+      body: [{}],
+      footer: {},
+      rowNumber: null,
+      rows: {},
     };
   }
 
@@ -81,9 +84,8 @@ class dataTable {
     renderTable(header, rows);
 
     function renderTable(header, rows) {
-      let headerClass = [];
-      let summarizeCol = [];
-      let summary = [0];
+      let columnNames = [];
+      let summary = [];
       let table = `
         <table class="dataDatble">
           <thead>
@@ -91,23 +93,28 @@ class dataTable {
 
       /* Generate header */
       for (let [i, col] of header.entries()) {
-        let colName = noSpecChars(col + "-" + i);
+        let columnName = noSpecChars(col + "-" + i);
 
-        for (let columnToSummarize of that.table.columnsToSummarize) {
-          that.table.header[colName] = {
+        for (let columnToSummarize of that.settings.columnsToSummarize) {
+          that.table.header[columnName] = {
+            order: i,
             name: col,
-            summarize: colName.includes(columnToSummarize),
+          };
+          that.table.footer[columnName] = {
+            order: i,
+            name: col,
+            summarize: columnName.includes(columnToSummarize),
             summary: 0,
           };
           break;
         }
 
         table += `
-        <th class="${colName}${
+        <th class="${columnName}${
           that.table.headersummarize ? " summarize" : ""
         }">${col}`;
 
-        headerClass.push(colName);
+        columnNames.push(columnName);
       }
 
       table += `
@@ -117,29 +124,31 @@ class dataTable {
       /* Generate body */
       table += `
           <tbody>`;
+
+      let dataRows = [];
       for (let [i, row] of rows.entries()) {
         let recordDate = null;
         let tableRows = "";
         let emptyCell = 0;
-
+        let record = {};
         let tableCell = "";
         for (let [j, col] of row.entries()) {
           col.length == 0 ? emptyCell++ : emptyCell;
 
           let cellData = checkCellValue(col);
 
-          summarizeCol[j] ? (summary[j] += cellData.cellValue) : null;
-
           cellData.type === "date" ? (recordDate = cellData.cellValue) : null;
 
           tableCell += `
-            <td class="${headerClass[j]} ${cellData.type}">${cellData.col}</td>`;
+            <td class="${columnNames[j]} ${cellData.type}">${cellData.col}</td>`;
 
-          let thisheaderclass = headerClass[j];
-          let column = {};
-          column[thisheaderclass] = cellData.cellValue;
-          that.table.body[i] = column;
+          record[columnNames[j]] = {
+            order: j,
+            value: cellData.cellValue,
+            type: cellData.type,
+          };
         }
+        dataRows.push(record);
 
         tableRows += `
             <tr class="${"row-" + i}" data-record-date="${recordDate}">`;
@@ -153,8 +162,6 @@ class dataTable {
           table += tableRows;
         }
 
-        that.table.body[i] = { id: i };
-
         /********************** */
         /********************** */
         /********************** */
@@ -163,6 +170,9 @@ class dataTable {
         /********************** */
         /********************** */
       }
+      that.table.body = dataRows;
+      //that.table.footer = footerSummary;
+
       table += `
           </tbody>`;
 
@@ -172,7 +182,7 @@ class dataTable {
             <tr class="headerFoot">`;
       for (let [j, col] of header.entries()) {
         table += `
-            <td class="${headerClass[j]}">${col}: ${summary[j]}</td>`;
+            <td class="${columnNames[j]}">${col}: ${summary[j]}</td>`;
       }
       table += `
             </tr>
@@ -271,7 +281,7 @@ class dataTable {
     }
 
     function checkCurrency(col) {
-      for (let currencyName of that.table.currencyNames) {
+      for (let currencyName of that.settings.currencyNames) {
         let cellValue;
         if (col.includes(currencyName)) {
           col = col.replace(currencyName, "");
@@ -299,8 +309,8 @@ class dataTable {
     }
 
     function noSpecChars(text, lowercase = true) {
-      for (let char in that.table.specialChars) {
-        text = replaceAll(text, char, that.table.specialChars[char]);
+      for (let char in that.settings.specialChars) {
+        text = replaceAll(text, char, that.settings.specialChars[char]);
       }
       return lowercase ? text.toLowerCase() : text;
     }
@@ -322,7 +332,7 @@ class dataTable {
     renderTable(this.table.header, this.table.rows);
 
     function renderTable(header, rows) {
-      let headerClass = [];
+      let columnNames = [];
       let summarizeCol = [];
       let summary = [0];
       let table = `
@@ -332,11 +342,11 @@ class dataTable {
 
       /* Generate header */
       for (let [i, col] of header.entries()) {
-        let colName = noSpecChars(col + "-" + i);
+        let columnName = noSpecChars(col + "-" + i);
 
         let summarize = false;
-        for (let columnToSummarize of that.table.columnsToSummarize) {
-          if (colName.includes(columnToSummarize)) {
+        for (let columnToSummarize of that.settings.columnsToSummarize) {
+          if (columnName.includes(columnToSummarize)) {
             summarize = true;
             break;
           }
@@ -345,9 +355,9 @@ class dataTable {
         summarizeCol.push(summarize);
 
         table += `
-        <th class="${colName}${summarize ? " summarize" : ""}">${col}`;
+        <th class="${columnName}${summarize ? " summarize" : ""}">${col}`;
 
-        headerClass.push(colName);
+        columnNames.push(columnName);
       }
 
       table += `
@@ -373,7 +383,7 @@ class dataTable {
           cellData.type === "date" ? (recordDate = cellData.cellValue) : null;
 
           tableCell += `
-            <td class="${headerClass[j]} ${cellData.type}">${cellData.col}</td>`;
+            <td class="${columnNames[j]} ${cellData.type}">${cellData.col}</td>`;
         }
 
         tableRows += `
@@ -397,7 +407,7 @@ class dataTable {
             <tr class="headerFoot">`;
       for (let [j, col] of header.entries()) {
         table += `
-            <td class="${headerClass[j]}">${col}: ${summary[j]}</td>`;
+            <td class="${columnNames[j]}">${col}: ${summary[j]}</td>`;
       }
       table += `
             </tr>
@@ -496,7 +506,7 @@ class dataTable {
     }
 
     function checkCurrency(col) {
-      for (let currencyName of that.table.currencyNames) {
+      for (let currencyName of that.settings.currencyNames) {
         let cellValue;
         if (col.includes(currencyName)) {
           col = col.replace(currencyName, "");
@@ -524,8 +534,8 @@ class dataTable {
     }
 
     function noSpecChars(text, lowercase = true) {
-      for (let char in that.table.specialChars) {
-        text = replaceAll(text, char, that.table.specialChars[char]);
+      for (let char in that.settings.specialChars) {
+        text = replaceAll(text, char, that.settings.specialChars[char]);
       }
       return lowercase ? text.toLowerCase() : text;
     }
