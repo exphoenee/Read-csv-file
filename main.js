@@ -1,3 +1,53 @@
+class renderElement {
+  constructor(prop) {
+    this.element = document.createElement(prop.type) || null;
+    this.targetParent = document.querySelector(prop.targetParent) || null;
+    this.prop = {
+      type: prop.type || null,
+      targetParentNode: prop.targetParentNode || null,
+      classes: prop.classes || null,
+      id: prop.id || null,
+      value: prop.value || null,
+      eventStarter: prop.eventStarter || null,
+      eventFunction: prop.eventFunction || null,
+      text: prop.text || null,
+      innerContent: prop.innerContent || null,
+      labelFor: prop.labelFor || null,
+    };
+  }
+
+  create() {
+    if (this.targetParent) {
+      this.targetParent.appendChild(this.element);
+    } else if (this.prop.targetParentNode) {
+      this.prop.targetParentNode.appendChild(this.element);
+    } else {
+      document.appendChild(this.element);
+    }
+    if (this.prop.classes) {
+      this.element.classList.add(this.prop.classes);
+    }
+    if (this.prop.id) {
+      this.element.id = this.prop.id;
+    }
+    if (this.prop.innerContent) {
+      this.element.innerHTML = this.prop.innerContent;
+    }
+    if (this.prop.value) {
+      this.element.value = this.prop.value;
+    }
+    if (this.prop.labelFor) {
+      this.element.setAttribute("for", this.prop.labelFor);
+    }
+    if (this.prop.eventStarter && this.prop.eventFunction) {
+      this.element.addEventListener(
+        this.prop.eventStarter,
+        this.prop.eventFunction
+      );
+    }
+  }
+}
+
 class dataTable {
   constructor(parameters) {
     this.datafile = parameters.datafile;
@@ -8,7 +58,7 @@ class dataTable {
       columnsToSummarize: ["munkaertek", "mennyiseg"],
       rowNumberOptions: [10, 25, 50, 100, 200, 500],
       page: 0,
-      maxPage: 1,
+      maxPage: null,
       showRowNumber: 10,
       currencyNames: ["Ft", "EUR", "USD", "HUF", "CHF"],
       specialChars: {
@@ -46,14 +96,14 @@ class dataTable {
     let that = this;
     this.sendRequest(
       function (CSVdata) {
-        that.generateTableObject(CSVdata);
+        that.buildTableObject(CSVdata);
       },
       this.datafile,
       "GET",
       false
     );
     this.renderTable();
-    this.generateController();
+    this.renderController();
   }
 
   sendRequest(
@@ -76,63 +126,145 @@ class dataTable {
     xhr.send(body);
   }
 
-  generateController() {
+  renderController() {
     this.tableController.classList.add("tableController");
     this.container.appendChild(this.tableController);
     this.container.insertBefore(this.tableController, this.table);
+    this.renderPageControl();
+    this.renderColumnControl();
+  }
 
+  renderColumnControl() {
+    let checkBoxesContainer = document.createElement("div");
+
+    for (let column in this.tableData.header) {
+      let checkBoxContainer = document.createElement("div");
+      let controllLabel = document.createElement("label");
+      let columnControl = document.createElement("checkbox");
+    }
+  }
+
+  renderPageControl() {
+    let that = this;
     let selectContainer = document.createElement("div");
-    let controllLabel = document.createElement("label");
-    let rowNumberSelect = document.createElement("select");
-    let prevButton = document.createElement("button");
-    let nextButton = document.createElement("button");
-
     this.tableController.appendChild(selectContainer);
-    selectContainer.appendChild(controllLabel);
-    selectContainer.appendChild(rowNumberSelect);
-    selectContainer.appendChild(prevButton);
-    selectContainer.appendChild(nextButton);
 
-    controllLabel.setAttribute("for", "rowNumberSelect");
-    controllLabel.innerHTML = "Sorok száma: ";
-    rowNumberSelect.id = "rowNumberSelect";
-    prevButton.innerHTML = "Előző";
-    prevButton.id = "lastPage";
-    nextButton.innerHTML = "Következő";
-    nextButton.id = "nextPage";
+    let controllLabel = new renderElement({
+      type: "label",
+      classes: "rowControlLabel",
+      targetParentNode: selectContainer,
+      labelFor: "rowNumberSelect",
+      innerContent: "Sorok száma: ",
+    });
+    controllLabel.create();
 
+    let rowNumberSelect = new renderElement({
+      type: "select",
+      id: "rowNumberSelect",
+      targetParentNode: selectContainer,
+      eventStarter: "change",
+      eventFunction: function () {
+        let currentRow = that.settings.showRowNumber * that.settings.page;
+        that.settings.showRowNumber = this.value;
+        that.settings.page = Math.ceil(
+          currentRow / that.settings.showRowNumber
+        );
+        that.setMaxPages();
+        that.renderTable();
+      },
+    });
+    rowNumberSelect.create();
+
+    let prevButton = new renderElement({
+      type: "button",
+      id: "prevPage",
+      targetParentNode: selectContainer,
+      innerContent: "Előző: ",
+      eventStarter: "click",
+      eventFunction: function () {
+        that.settings.page--;
+        if (that.settings.page < 0) {
+          that.settings.page = 0;
+        }
+        that.renderTable();
+      },
+    });
+    prevButton.create();
+
+    let nextButton = new renderElement({
+      type: "button",
+      id: "nextPage",
+      targetParentNode: selectContainer,
+      innerContent: "Következő: ",
+      eventStarter: "click",
+      eventFunction: function () {
+        that.settings.page++;
+        if (that.settings.page > that.settings.maxPage) {
+          that.settings.page = that.settings.maxPage;
+        }
+        that.renderTable();
+      },
+    });
+    nextButton.create();
+
+    this.settings.rowNumberOptions.push(this.tableData.recordNumber);
+
+    /*
+
+    this.settings.rowNumberOptions.push(this.tableData.recordNumber);
     for (let rowNumberOption of this.settings.rowNumberOptions) {
-      let option = document.createElement("option");
-      option.value = rowNumberOption;
-      option.text = rowNumberOption + " sor";
-      rowNumberSelect.appendChild(option);
+      if (rowNumberOption <= this.tableData.recordNumber) {
+        let option = document.createElement("option");
+        option.value = rowNumberOption;
+        option.text =
+          rowNumberOption !== this.tableData.recordNumber
+            ? rowNumberOption
+            : "összes";
+        option.text += " sor";
+        rowNumberSelect.appendChild(option);
+      }
     }
 
     let that = this;
     rowNumberSelect.addEventListener("change", function () {
+      let currentRow = that.settings.showRowNumber * that.settings.page;
+
       that.settings.showRowNumber = this.value;
-      that.settings.maxPage = Math.ceil(
-        that.tableData.recordNumber / that.settings.showRowNumber
+      that.settings.page = Math.ceil(
+        currentRow / that.settings.showRowNumber
       );
+      that.setMaxPages();
       that.renderTable();
     });
-    prevButton.addEventListener("click", function () {
-      that.settings.page--;
-      if (that.settings.page < 0) {
-        that.settings.page = 0;
+    }*/
+
+    for (let rowNumberOption of this.settings.rowNumberOptions) {
+      if (rowNumberOption <= this.tableData.recordNumber) {
+        let text =
+          rowNumberOption !== this.tableData.recordNumber
+            ? rowNumberOption
+            : "összes";
+        text += " sor";
+
+        console.log(text);
+
+        let option = new renderElement({
+          type: "option",
+          value: rowNumberOption,
+          targetParentNode: rowNumberSelect.element,
+          innerContent: text,
+        });
+        option.create();
       }
-      that.renderTable();
-    });
-    nextButton.addEventListener("click", function () {
-      that.settings.page++;
-      if (that.settings.page > that.settings.maxPage) {
-        that.settings.page = that.settings.maxPage;
-      }
-      that.renderTable();
-    });
+    }
   }
 
-  generateTableObject(rawData) {
+  setMaxPages() {
+    this.settings.maxPage =
+      Math.ceil(this.tableData.recordNumber / this.settings.showRowNumber) - 1;
+  }
+
+  buildTableObject(rawData) {
     let that = this;
     let allLines = rawData.split(/\r\n|\n/);
     let dataRows = [];
@@ -181,9 +313,7 @@ class dataTable {
             }
           }
           this.tableData.recordNumber = dataRows.length;
-          that.settings.maxPage = Math.ceil(
-            that.tableData.recordNumber / that.settings.showRowNumber
-          );
+          this.setMaxPages();
         }
       }
     }
@@ -317,7 +447,7 @@ class dataTable {
       return lowercase ? text.toLowerCase() : text;
     }
 
-    console.log(this.tableData);
+    //console.log(this.tableData);
   }
 
   renderTable() {
@@ -336,15 +466,12 @@ class dataTable {
     table += `<tbody>`;
 
     let row = [];
-    console.log(this.settings.page * this.settings.showRowNumber);
-    console.log((this.settings.page + 1) * this.settings.showRowNumber);
     for (let [rowNr, record] of this.tableData.body.entries()) {
       let rowId;
       if (
         this.settings.page * this.settings.showRowNumber <= rowNr &&
         (this.settings.page + 1) * this.settings.showRowNumber - 1 >= rowNr
       ) {
-        console.log(rowNr);
         let cells = [];
         for (let column in record) {
           let order = record[column].order;
