@@ -45,3 +45,18 @@ tr:hover {
   box-shadow: 1px 2px 5px gray !important;
   border: 1px solid gray !important;
 }
+/* for debugging purpose only */
+/*
+.number {
+  background-color: red !important;
+}
+.timeStamp {
+  background-color: blue !important;
+}
+.date {
+  background-color: green !important;
+}
+.string {
+  background-color: orange !important;
+}
+*/
