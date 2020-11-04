@@ -3,13 +3,15 @@ table {
   position: relative;
 }
 
-th {
-  background-color: #111;
+th,
+tfoot td {
+  background-color: #111 !important;
   color: #ccc;
   position: sticky;
   top: 0;
 }
-td {
+td,
+th {
   padding: 2px;
 }
 tr {
@@ -45,6 +47,11 @@ tr:hover {
   box-shadow: 1px 2px 5px gray !important;
   border: 1px solid gray !important;
 }
+
+.hide {
+  display: none;
+}
+
 /* for debugging purpose only */
 /*
 .number {

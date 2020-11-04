@@ -1,10 +1,9 @@
 class renderElement {
   constructor(prop) {
-    this.element = document.createElement(prop.type) || null;
-    this.targetParent = document.querySelector(prop.targetParent) || null;
     this.prop = {
       type: prop.type || null,
-      targetParentNode: prop.targetParentNode || null,
+      targetParent: prop.targetParent || null,
+      beforeSibling: prop.beforeSibling || null,
       classes: prop.classes || null,
       id: prop.id || null,
       value: prop.value || null,
@@ -13,16 +12,40 @@ class renderElement {
       text: prop.text || null,
       innerContent: prop.innerContent || null,
       labelFor: prop.labelFor || null,
+      inputType: prop.inputType || null,
+      checked: prop.checked || null,
     };
+    this.element = document.createElement(prop.type) || null;
   }
 
   create() {
-    if (this.targetParent) {
-      this.targetParent.appendChild(this.element);
-    } else if (this.prop.targetParentNode) {
-      this.prop.targetParentNode.appendChild(this.element);
-    } else {
-      document.appendChild(this.element);
+    if (this.prop.type === "input") {
+      this.element.type = this.prop.inputType;
+      if (this.element.type === "checkbox") {
+        this.element.checked = this.prop.checked;
+      }
+    }
+    if (this.prop.targetParent) {
+      if (typeof this.prop.targetParent === "string") {
+        this.prop.targetParent = document.querySelector(this.prop.targetParent);
+      } else if (typeof this.prop.targetParent === "node") {
+        null;
+      }
+      this.prop.targetParent.appendChild(this.element);
+    }
+    if (this.prop.beforeSibling) {
+      if (typeof this.prop.targetParent === "string") {
+        this.prop.targetParent = document.querySelector(prop.beforeSibling);
+      } else if (typeof this.prop.targetParent === "node") {
+        null;
+      }
+      this.prop.targetParent.insertBefore(
+        this.element,
+        this.prop.beforeSibling
+      );
+    }
+    if (this.prop.classes) {
+      this.element.classList.add(this.prop.classes);
     }
     if (this.prop.classes) {
       this.element.classList.add(this.prop.classes);
@@ -52,9 +75,16 @@ class dataTable {
   constructor(parameters) {
     this.datafile = parameters.datafile;
     this.container = document.querySelector("." + parameters.containerID);
-    this.tableController = document.createElement("div");
+    this.tableController = null;
     this.table = document.createElement("table");
     this.settings = {
+      columnShow: {},
+      dateFilters: {
+        beginDate: -Infinity,
+        endDate: Infinity,
+        firstRecordDate: -Infinity,
+        LastRecordDate: Infinity,
+      },
       columnsToSummarize: ["munkaertek", "mennyiseg"],
       rowNumberOptions: [10, 25, 50, 100, 200, 500],
       page: 0,
@@ -87,7 +117,6 @@ class dataTable {
       header: {},
       body: [{}],
       footer: {},
-      rowNumber: null,
       rowNumber: null,
     };
   }
@@ -127,32 +156,176 @@ class dataTable {
   }
 
   renderController() {
-    this.tableController.classList.add("tableController");
-    this.container.appendChild(this.tableController);
-    this.container.insertBefore(this.tableController, this.table);
+    this.tableController = new renderElement({
+      type: "div",
+      classes: "tableController",
+      targetParent: this.container,
+      beforeSibling: this.table,
+    });
+    this.tableController.create();
+
     this.renderPageControl();
+    this.dateFilter();
     this.renderColumnControl();
   }
 
+  dateFilter() {
+    let that = this;
+
+    let dateFilterContainer = new renderElement({
+      type: "div",
+      classes: "dateFilterContainer",
+      id: "dateFilterContainer",
+      targetParent: this.tableController.element,
+    });
+    dateFilterContainer.create();
+
+    let beginDate = new renderElement({
+      type: "input",
+      inputType: "date",
+      classes: "beginDate",
+      id: "beginDate",
+      targetParent: dateFilterContainer.element,
+      eventStarter: "change",
+      eventFunction: function (e) {
+        e.preventDefault();
+        let newDateValue = Number(this.value.split("-").join(""));
+        let oldEndDateValue = that.settings.dateFilters.endDate;
+
+        let beginDateValue = Math.min(newDateValue, oldEndDateValue);
+        let endDateValue = Math.max(newDateValue, oldEndDateValue);
+
+        beginDateValue < that.settings.dateFilters.firstRecordDate
+          ? (beginDateValue = that.settings.dateFilters.firstRecordDate)
+          : null;
+
+        endDateValue > that.settings.dateFilters.lastRecordDate
+          ? (endDateValue = that.settings.dateFilters.lastRecordDate)
+          : null;
+
+        that.settings.dateFilters.beginDate = beginDateValue;
+        that.settings.dateFilters.endDate = endDateValue;
+
+        generateFilterText();
+        that.renderTable();
+      },
+    });
+    beginDate.create();
+
+    let endDate = new renderElement({
+      type: "input",
+      inputType: "date",
+      classes: "endDate",
+      id: "endDate",
+      targetParent: dateFilterContainer.element,
+      eventStarter: "change",
+      eventFunction: function (e) {
+        e.preventDefault();
+        let newDateValue = Number(this.value.split("-").join(""));
+        let oldBeginDateValue = that.settings.dateFilters.beginDate;
+
+        let beginDateValue = Math.min(newDateValue, oldBeginDateValue);
+        let endDateValue = Math.max(newDateValue, oldBeginDateValue);
+
+        beginDateValue < that.settings.dateFilters.firstRecordDate
+          ? (beginDateValue = that.settings.dateFilters.firstRecordDate)
+          : null;
+
+        endDateValue > that.settings.dateFilters.lastRecordDate
+          ? (endDateValue = that.settings.dateFilters.lastRecordDate)
+          : null;
+
+        that.settings.dateFilters.beginDate = beginDateValue;
+        that.settings.dateFilters.endDate = endDateValue;
+
+        generateFilterText();
+        that.renderTable();
+      },
+    });
+    endDate.create();
+
+    let filterText = new renderElement({
+      type: "p",
+      classes: "filterText",
+      id: "filterText",
+      targetParent: dateFilterContainer.element,
+      innerContent: generateFilterText(),
+    });
+    filterText.create();
+    that.settings.dateFilters.filterText = filterText.element;
+    console.log(that.settings.dateFilters.filterText);
+
+    function generateFilterText() {
+      let filterText =
+        "Dátumszűrés: " +
+        that.settings.dateFilters.beginDate +
+        " - " +
+        that.settings.dateFilters.endDate;
+      if (that.settings.dateFilters.filterText) {
+        that.settings.dateFilters.filterText.innerHTML = filterText;
+      }
+      return filterText;
+    }
+  }
+
   renderColumnControl() {
-    let checkBoxesContainer = document.createElement("div");
+    let that = this;
+
+    let checkBoxesContainer = new renderElement({
+      type: "div",
+      classes: "checkBoxesContainer",
+      id: "checkBoxesContainer",
+      targetParent: this.tableController.element,
+    });
+    checkBoxesContainer.create();
 
     for (let column in this.tableData.header) {
-      let checkBoxContainer = document.createElement("div");
-      let controllLabel = document.createElement("label");
-      let columnControl = document.createElement("checkbox");
+      let checkBoxLabel = new renderElement({
+        type: "label",
+        innerContent: this.tableData.header[column].name,
+        labelFor: column,
+        targetParent: checkBoxesContainer.element,
+      });
+
+      let checkBox = new renderElement({
+        type: "input",
+        id: column,
+        inputType: "checkbox",
+        checked: that.settings.columnShow[column],
+        targetParent: checkBoxesContainer.element,
+        eventStarter: "click",
+        eventFunction: function () {
+          let selecetdColumn = that.table.querySelectorAll("." + this.id);
+          that.settings.columnShow[this.id] = checkBox.element.checked;
+          selecetdColumn.forEach(function (cell) {
+            if (!checkBox.element.checked) {
+              cell.classList.add("hide");
+            } else {
+              cell.classList.remove("hide");
+            }
+          });
+        },
+      });
+
+      checkBox.create();
+      checkBoxLabel.create();
     }
   }
 
   renderPageControl() {
     let that = this;
-    let selectContainer = document.createElement("div");
-    this.tableController.appendChild(selectContainer);
+
+    let selectContainer = new renderElement({
+      type: "div",
+      classes: "selectContainer",
+      targetParent: this.tableController.element,
+    });
+    selectContainer.create();
 
     let controllLabel = new renderElement({
       type: "label",
       classes: "rowControlLabel",
-      targetParentNode: selectContainer,
+      targetParent: selectContainer.element,
       labelFor: "rowNumberSelect",
       innerContent: "Sorok száma: ",
     });
@@ -161,9 +334,10 @@ class dataTable {
     let rowNumberSelect = new renderElement({
       type: "select",
       id: "rowNumberSelect",
-      targetParentNode: selectContainer,
+      targetParent: selectContainer.element,
       eventStarter: "change",
-      eventFunction: function () {
+      eventFunction: function (e) {
+        e.preventDefault();
         let currentRow = that.settings.showRowNumber * that.settings.page;
         that.settings.showRowNumber = this.value;
         that.settings.page = Math.ceil(
@@ -178,10 +352,11 @@ class dataTable {
     let prevButton = new renderElement({
       type: "button",
       id: "prevPage",
-      targetParentNode: selectContainer,
+      targetParent: selectContainer.element,
       innerContent: "Előző: ",
       eventStarter: "click",
-      eventFunction: function () {
+      eventFunction: function (e) {
+        e.preventDefault();
         that.settings.page--;
         if (that.settings.page < 0) {
           that.settings.page = 0;
@@ -194,10 +369,11 @@ class dataTable {
     let nextButton = new renderElement({
       type: "button",
       id: "nextPage",
-      targetParentNode: selectContainer,
+      targetParent: selectContainer.element,
       innerContent: "Következő: ",
       eventStarter: "click",
-      eventFunction: function () {
+      eventFunction: function (e) {
+        e.preventDefault();
         that.settings.page++;
         if (that.settings.page > that.settings.maxPage) {
           that.settings.page = that.settings.maxPage;
@@ -209,35 +385,6 @@ class dataTable {
 
     this.settings.rowNumberOptions.push(this.tableData.recordNumber);
 
-    /*
-
-    this.settings.rowNumberOptions.push(this.tableData.recordNumber);
-    for (let rowNumberOption of this.settings.rowNumberOptions) {
-      if (rowNumberOption <= this.tableData.recordNumber) {
-        let option = document.createElement("option");
-        option.value = rowNumberOption;
-        option.text =
-          rowNumberOption !== this.tableData.recordNumber
-            ? rowNumberOption
-            : "összes";
-        option.text += " sor";
-        rowNumberSelect.appendChild(option);
-      }
-    }
-
-    let that = this;
-    rowNumberSelect.addEventListener("change", function () {
-      let currentRow = that.settings.showRowNumber * that.settings.page;
-
-      that.settings.showRowNumber = this.value;
-      that.settings.page = Math.ceil(
-        currentRow / that.settings.showRowNumber
-      );
-      that.setMaxPages();
-      that.renderTable();
-    });
-    }*/
-
     for (let rowNumberOption of this.settings.rowNumberOptions) {
       if (rowNumberOption <= this.tableData.recordNumber) {
         let text =
@@ -246,12 +393,10 @@ class dataTable {
             : "összes";
         text += " sor";
 
-        console.log(text);
-
         let option = new renderElement({
           type: "option",
           value: rowNumberOption,
-          targetParentNode: rowNumberSelect.element,
+          targetParent: rowNumberSelect.element,
           innerContent: text,
         });
         option.create();
@@ -372,17 +517,16 @@ class dataTable {
             value.length === dateLenghtsCheck[i] ? checker++ : null;
           }
           if ((checker = 3)) {
-            let date = checkCellValues.join("-");
+            let date = checkCellValues.join("");
             let dateUTC = new Date(date);
-            col = `
-            <span
+            col = `<span
             class="recordDate"
             data-year="${checkCellValues[0]}"
             data-month="${checkCellValues[1]}"
             data-day="${checkCellValues[2]}"
             data-type="recordDate"
             data-dateUTC="${dateUTC}"
-            >${date}</span>`;
+            >${col}</span>`;
             return { type: "date", col: col, cellValue: date };
           }
         }
@@ -446,48 +590,77 @@ class dataTable {
       }
       return lowercase ? text.toLowerCase() : text;
     }
-
-    //console.log(this.tableData);
   }
 
-  renderTable() {
-    let table = "";
-    table += `<thead>`;
+  renderTableHeader() {
+    let header = "";
+    header += `<thead>`;
 
     let headerCells = [];
     for (let headerCell in this.tableData.header) {
       let cell = this.tableData.header[headerCell];
       let order = cell.order;
-      headerCells[order] = `<th>${this.tableData.header[headerCell].name}</th>`;
+
+      this.settings.columnShow[headerCell] === undefined
+        ? (this.settings.columnShow[headerCell] = true)
+        : null;
+
+      headerCells[order] = `<th class="${headerCell}${
+        this.settings.columnShow[headerCell] ? "" : " hide"
+      }">${this.tableData.header[headerCell].name}</th>`;
     }
-    table += `<tr>${headerCells.join("")}</tr>`;
+    header += `<tr>${headerCells.join("")}</tr>`;
 
-    table += `</thead>`;
-    table += `<tbody>`;
+    header += `</thead>`;
+    return header;
+  }
 
+  renderTableBody() {
+    let body = "";
     let row = [];
+    let recordDates = [];
+    this.tableData.recordNumber = 0;
+
+    body += `<tbody>`;
+
     for (let [rowNr, record] of this.tableData.body.entries()) {
       let rowId;
+      let dateFilterPassed = false;
+      if (
+        Number(record.datum.value) <= this.settings.dateFilters.endDate &&
+        this.settings.dateFilters.beginDate <= Number(record.datum.value)
+      ) {
+        dateFilterPassed = true;
+        this.tableData.recordNumber++;
+        this.setMaxPages();
+      }
+
       if (
         this.settings.page * this.settings.showRowNumber <= rowNr &&
-        (this.settings.page + 1) * this.settings.showRowNumber - 1 >= rowNr
+        (this.settings.page + 1) * this.settings.showRowNumber - 1 >= rowNr &&
+        dateFilterPassed
       ) {
         let cells = [];
+
         for (let column in record) {
           let order = record[column].order;
           let value = record[column].value;
           let type = record[column].type;
           let cell = record[column].cell;
-
           rowId = record[column].row;
+
           cells[order] = `<td
-            class="${column}"
+            class="${column}${this.settings.columnShow[column] ? "" : " hide"}"
             ${value !== null ? `data-value="${value}"` : ``}
             data-type="${type}">${cell}</td>`;
         }
+
         row[rowNr] = `<tr
           id="${rowId}"
           class="${record.datum.value}">${cells.join("")}</tr>`;
+
+        recordDates.push(record.datum.value);
+
         if (
           rowNr ==
           this.settings.initialRow + this.settings.showRowNumber - 1
@@ -496,23 +669,44 @@ class dataTable {
         }
       }
     }
-    table += row.join("");
+    if (this.settings.dateFilters.beginDate === -Infinity) {
+      this.settings.dateFilters.firstRecordDate = Math.min(...recordDates);
+    }
+    if (this.settings.dateFilters.endDate === Infinity) {
+      this.settings.dateFilters.LastRecordDate = Math.max(...recordDates);
+    }
+    body += row.join("");
 
-    table += `</tbody`;
+    body += `</tbody>`;
+    return body;
+  }
 
-    table += `<tfooter`;
+  renderTableFooter() {
+    let footer = "";
+    footer += `<tfoot>`;
     let footerCells = [];
     for (let footerCell in this.tableData.header) {
       let cell = this.tableData.footer[footerCell];
       let order = cell.order;
       let summary = this.tableData.footer[footerCell].summary;
 
-      footerCells[order] = `<th>${this.tableData.header[footerCell].name}${
+      footerCells[order] = `<td class="${footerCell}
+      ${this.settings.columnShow[footerCell] ? "" : " hide"}
+      ">${this.tableData.header[footerCell].name}${
         summary ? ` összesen: ${summary}` : ``
-      }</th>`;
+      }</td>`;
     }
-    table += `<tr>${footerCells.join("")}</tr>`;
-    table += `</tfooter`;
+    footer += `<tr>${footerCells.join("")}</tr>`;
+    footer += `</tfoot>`;
+    return footer;
+  }
+
+  renderTable() {
+    let table = "";
+
+    table += this.renderTableHeader();
+    table += this.renderTableBody();
+    table += this.renderTableFooter();
 
     this.container.appendChild(this.table);
     this.table.innerHTML = table;
