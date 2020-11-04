@@ -457,7 +457,7 @@ class dataTable {
                 record[columnNames[colNr]].value;
             }
           }
-          this.tableData.recordNumber = dataRows.length;
+          this.tableData.allRecordNumber = dataRows.length;
           this.setMaxPages();
         }
       }
@@ -615,6 +615,26 @@ class dataTable {
     return header;
   }
 
+  filterTable() {
+    this.tableData.filteredRows = [];
+
+    for (let [rowNr, record] of this.tableData.body.entries()) {
+      let dateFilterPassed = false;
+      if (
+        this.settings.page * this.settings.showRowNumber <= rowNr &&
+        (this.settings.page + 1) * this.settings.showRowNumber - 1 >= rowNr &&
+        Number(record.datum.value) <= this.settings.dateFilters.endDate &&
+        this.settings.dateFilters.beginDate <= Number(record.datum.value)
+      ) {
+        dateFilterPassed = true;
+        this.tableData.recordNumber++;
+        this.setMaxPages();
+        this.tableData.filteredRows.push(record);
+      }
+    }
+    return this.tableData.filteredRows;
+  }
+
   renderTableBody() {
     let body = "";
     let row = [];
@@ -623,7 +643,9 @@ class dataTable {
 
     body += `<tbody>`;
 
-    for (let [rowNr, record] of this.tableData.body.entries()) {
+    for (let [rowNr, record] of this.filterTable(
+      this.tableData.body
+    ).entries()) {
       let rowId;
       let dateFilterPassed = false;
       if (
