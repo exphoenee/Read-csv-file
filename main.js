@@ -1,3 +1,40 @@
+let Elem = {
+  Create: function (parameters) {
+    let tag = parameters.tag || "div";
+    let attributes = parameters.attributes || {};
+    let children = parameters.children || [];
+    let eventStarter = parameters.eventStarter || null;
+    let eventFunction = parameters.eventFunction || null;
+    let content = parameters.content || null;
+
+    let elem = document.createElement(tag);
+
+    for (let attr in attributes) {
+      elem.setAttribute(attr, attributes[attr]);
+    }
+
+    for (let i in children) {
+      let child = children[i];
+
+      if (typeof child != "object") {
+        child = document.createTextNode(child);
+      }
+
+      elem.appendChild(child);
+    }
+
+    if (content) {
+      elem.innerHTML = content;
+    }
+
+    if (eventStarter && eventFunction) {
+      elem.addEventListener(eventStarter, eventFunction);
+    }
+
+    return elem;
+  },
+};
+
 class renderElement {
   constructor(prop) {
     this.prop = {
