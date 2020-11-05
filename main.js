@@ -73,22 +73,23 @@ class renderElement {
 
 class dataTable {
   constructor(parameters) {
-    this.datafile = parameters.datafile;
+    this.dataFile = parameters.dataFile;
     this.container = document.querySelector("." + parameters.containerID);
     this.tableController = null;
     this.table = document.createElement("table");
     this.settings = {
       columnShow: {},
+      dateFilterColumns: parameters.dateFilterColumns,
       dateFilters: {
-        beginDate: -Infinity,
-        endDate: Infinity,
-        firstRecordDate: -Infinity,
-        LastRecordDate: Infinity,
+        beginDate: null,
+        endDate: null,
+        firstRecordDate: null,
+        LastRecordDate: null,
       },
-      columnsToSummarize: ["munkaertek", "mennyiseg"],
-      rowNumberOptions: [10, 25, 50, 100, 200, 500],
+      textFilters: {},
+      columnsToSummarize: parameters.columnsToSummarize,
+      rowNumberOptions: [10, 25, 50, 100, 200, 500, 1000],
       page: 0,
-      maxPage: null,
       showRowNumber: 10,
       currencyNames: ["Ft", "EUR", "USD", "HUF", "CHF"],
       specialChars: {
@@ -118,6 +119,7 @@ class dataTable {
       body: [{}],
       footer: {},
       rowNumber: null,
+      recordNumber: 0,
     };
   }
 
@@ -127,7 +129,7 @@ class dataTable {
       function (CSVdata) {
         that.buildTableObject(CSVdata);
       },
-      this.datafile,
+      this.dataFile,
       "GET",
       false
     );
@@ -167,9 +169,58 @@ class dataTable {
     this.renderPageControl();
     this.dateFilter();
     this.renderColumnControl();
+    //this.renderColumnFilter();
+  }
+
+  renderColumnFilter() {
+    let that = this;
+    let filters = {};
+    for (let column in this.tableData.header) {
+      let texts = [];
+      for (let row of this.tableData.body) {
+        let colValueKey = null;
+        if (row[column].type === "string") {
+          colValueKey = "cell";
+        }
+        if (!texts.includes(row[column][colValueKey]) && colValueKey) {
+          texts.push(row[column].cell);
+        }
+      }
+      if (texts.length > 0) {
+        filters[column] = texts;
+
+        let headerCell = document.getElementById(column);
+
+        let textFilter = new renderElement({
+          type: "select",
+          id: `${column}-textFilter`,
+          targetParent: headerCell,
+          eventStarter: "change",
+          eventFunction: function (e) {
+            e.preventDefault();
+            that.settings.textFilters[column] = this.value;
+            that.setMaxPage();
+            that.renderTable();
+          },
+        });
+        textFilter.create();
+
+        texts.unshift("Nincs szűrés");
+        for (let [i, text] of texts.entries()) {
+          let option = new renderElement({
+            type: "option",
+            value: i === 0 ? null : text,
+            targetParent: textFilter.element,
+            innerContent: text,
+          });
+          option.create();
+        }
+      }
+    }
   }
 
   dateFilter() {
+    /* ide több dátum filtert a parametersben megadott tömb szerint!*/
     let that = this;
 
     let dateFilterContainer = new renderElement({
@@ -189,22 +240,12 @@ class dataTable {
       eventStarter: "change",
       eventFunction: function (e) {
         e.preventDefault();
-        let newDateValue = Number(this.value.split("-").join(""));
-        let oldEndDateValue = that.settings.dateFilters.endDate;
+        let newBegintDate = Number(this.value.split("-").join(""));
 
-        let beginDateValue = Math.min(newDateValue, oldEndDateValue);
-        let endDateValue = Math.max(newDateValue, oldEndDateValue);
-
-        beginDateValue < that.settings.dateFilters.firstRecordDate
-          ? (beginDateValue = that.settings.dateFilters.firstRecordDate)
-          : null;
-
-        endDateValue > that.settings.dateFilters.lastRecordDate
-          ? (endDateValue = that.settings.dateFilters.lastRecordDate)
-          : null;
-
-        that.settings.dateFilters.beginDate = beginDateValue;
-        that.settings.dateFilters.endDate = endDateValue;
+        that.settings.dateFilters.beginDate =
+          newBegintDate < that.settings.dateFilters.firstRecordDate
+            ? that.settings.dateFilters.firstRecordDate
+            : newBegintDate;
 
         generateFilterText();
         that.renderTable();
@@ -221,22 +262,12 @@ class dataTable {
       eventStarter: "change",
       eventFunction: function (e) {
         e.preventDefault();
-        let newDateValue = Number(this.value.split("-").join(""));
-        let oldBeginDateValue = that.settings.dateFilters.beginDate;
+        let newEndDate = Number(this.value.split("-").join(""));
 
-        let beginDateValue = Math.min(newDateValue, oldBeginDateValue);
-        let endDateValue = Math.max(newDateValue, oldBeginDateValue);
-
-        beginDateValue < that.settings.dateFilters.firstRecordDate
-          ? (beginDateValue = that.settings.dateFilters.firstRecordDate)
-          : null;
-
-        endDateValue > that.settings.dateFilters.lastRecordDate
-          ? (endDateValue = that.settings.dateFilters.lastRecordDate)
-          : null;
-
-        that.settings.dateFilters.beginDate = beginDateValue;
-        that.settings.dateFilters.endDate = endDateValue;
+        that.settings.dateFilters.endDate =
+          newEndDate > that.settings.dateFilters.LastRecordDate
+            ? that.settings.dateFilters.LastRecordDate
+            : newEndDate;
 
         generateFilterText();
         that.renderTable();
@@ -253,14 +284,24 @@ class dataTable {
     });
     filterText.create();
     that.settings.dateFilters.filterText = filterText.element;
-    console.log(that.settings.dateFilters.filterText);
 
     function generateFilterText() {
+      function dateToText(date) {
+        let dateTxt = String(date);
+        return (
+          dateTxt.slice(0, 4) +
+          ". " +
+          dateTxt.slice(4, 6) +
+          ". " +
+          dateTxt.slice(6, 8) +
+          "."
+        );
+      }
       let filterText =
         "Dátumszűrés: " +
-        that.settings.dateFilters.beginDate +
+        dateToText(that.settings.dateFilters.beginDate) +
         " - " +
-        that.settings.dateFilters.endDate;
+        dateToText(that.settings.dateFilters.endDate);
       if (that.settings.dateFilters.filterText) {
         that.settings.dateFilters.filterText.innerHTML = filterText;
       }
@@ -283,19 +324,21 @@ class dataTable {
       let checkBoxLabel = new renderElement({
         type: "label",
         innerContent: this.tableData.header[column].name,
-        labelFor: column,
+        labelFor: `${column}-checkbox`,
         targetParent: checkBoxesContainer.element,
       });
 
       let checkBox = new renderElement({
         type: "input",
-        id: column,
+        id: `${column}-checkbox`,
         inputType: "checkbox",
         checked: that.settings.columnShow[column],
         targetParent: checkBoxesContainer.element,
         eventStarter: "click",
         eventFunction: function () {
-          let selecetdColumn = that.table.querySelectorAll("." + this.id);
+          let selecetdColumn = that.table.querySelectorAll(
+            "." + this.id.split("-")[0]
+          );
           that.settings.columnShow[this.id] = checkBox.element.checked;
           selecetdColumn.forEach(function (cell) {
             if (!checkBox.element.checked) {
@@ -339,11 +382,12 @@ class dataTable {
       eventFunction: function (e) {
         e.preventDefault();
         let currentRow = that.settings.showRowNumber * that.settings.page;
-        that.settings.showRowNumber = this.value;
-        that.settings.page = Math.ceil(
+        that.settings.showRowNumber = Number(this.value);
+        that.settings.page = Math.floor(
           currentRow / that.settings.showRowNumber
         );
-        that.setMaxPages();
+        that.setMaxPage();
+        generatePageText();
         that.renderTable();
       },
     });
@@ -378,17 +422,36 @@ class dataTable {
         if (that.settings.page > that.settings.maxPage) {
           that.settings.page = that.settings.maxPage;
         }
+        generatePageText();
         that.renderTable();
       },
     });
     nextButton.create();
 
-    this.settings.rowNumberOptions.push(this.tableData.recordNumber);
+    function generatePageText() {
+      let text = `${that.settings.page + 1}. oldal a(z) ${
+        that.settings.maxPage + 1
+      } oldalból`;
+      if (that.settings.pageNumberText) {
+        that.settings.pageNumberText.innerHTML = text;
+      } else return text;
+    }
+
+    let pageNumber = new renderElement({
+      type: "p",
+      id: "siteNumber",
+      targetParent: selectContainer.element,
+      innerContent: generatePageText(),
+    });
+    pageNumber.create();
+    this.settings.pageNumberText = pageNumber.element;
+
+    this.settings.rowNumberOptions.push(this.tableData.allRecordNumber);
 
     for (let rowNumberOption of this.settings.rowNumberOptions) {
-      if (rowNumberOption <= this.tableData.recordNumber) {
+      if (rowNumberOption <= this.tableData.allRecordNumber) {
         let text =
-          rowNumberOption !== this.tableData.recordNumber
+          rowNumberOption !== this.tableData.allRecordNumber
             ? rowNumberOption
             : "összes";
         text += " sor";
@@ -404,16 +467,12 @@ class dataTable {
     }
   }
 
-  setMaxPages() {
-    this.settings.maxPage =
-      Math.ceil(this.tableData.recordNumber / this.settings.showRowNumber) - 1;
-  }
-
   buildTableObject(rawData) {
     let that = this;
     let allLines = rawData.split(/\r\n|\n/);
     let dataRows = [];
     let columnNames = [];
+    let recordDates = [];
 
     this.tableData.rowNumber = allLines.length;
 
@@ -428,6 +487,7 @@ class dataTable {
         if (rowNr === 0) {
           let columnName = noSpecChars(col);
           columnNames.push(columnName);
+          that.settings.textFilters[columnName] = null;
 
           that.tableData.header[columnName] = {
             order: colNr,
@@ -448,6 +508,11 @@ class dataTable {
             value: cellData.cellValue,
             type: cellData.type,
           };
+
+          if (cellData.type === "date") {
+            recordDates.push(Number(record.datum.value));
+          }
+
           if (colNr === row.length - 1 && emptyCell < row.length) {
             dataRows.push(record);
           }
@@ -458,10 +523,16 @@ class dataTable {
             }
           }
           this.tableData.allRecordNumber = dataRows.length;
-          this.setMaxPages();
         }
       }
     }
+
+    /* hú bazeg itt is date Filter több lehet....*/
+    this.settings.dateFilters.beginDate = Math.min(...recordDates);
+    this.settings.dateFilters.firstRecordDate = Math.min(...recordDates);
+    this.settings.dateFilters.endDate = Math.max(...recordDates);
+    this.settings.dateFilters.LastRecordDate = Math.max(...recordDates);
+
     that.tableData.body = dataRows;
 
     function checkCellValue(col) {
@@ -605,7 +676,7 @@ class dataTable {
         ? (this.settings.columnShow[headerCell] = true)
         : null;
 
-      headerCells[order] = `<th class="${headerCell}${
+      headerCells[order] = `<th id="${headerCell}" class="${headerCell}${
         this.settings.columnShow[headerCell] ? "" : " hide"
       }">${this.tableData.header[headerCell].name}</th>`;
     }
@@ -615,88 +686,104 @@ class dataTable {
     return header;
   }
 
-  filterTable() {
-    this.tableData.filteredRows = [];
+  setMaxPage() {
+    if (this.settings.showRowNumber >= this.tableData.recordNumber) {
+      this.settings.maxPage = 0;
+      this.settings.page = 0;
+    } else {
+      this.settings.maxPage = Math.floor(
+        this.tableData.recordNumber / this.settings.showRowNumber
+      );
+    }
+    this.settings.page = Math.min(this.settings.maxPage, this.settings.page);
+  }
 
-    for (let [rowNr, record] of this.tableData.body.entries()) {
-      let dateFilterPassed = false;
-      if (
-        this.settings.page * this.settings.showRowNumber <= rowNr &&
-        (this.settings.page + 1) * this.settings.showRowNumber - 1 >= rowNr &&
-        Number(record.datum.value) <= this.settings.dateFilters.endDate &&
-        this.settings.dateFilters.beginDate <= Number(record.datum.value)
-      ) {
-        dateFilterPassed = true;
-        this.tableData.recordNumber++;
-        this.setMaxPages();
-        this.tableData.filteredRows.push(record);
+  dateFilterTable(tableRows) {
+    for (let filterColumn of this.settings.dateFilterColumns) {
+      for (let record of this.tableData.body) {
+        if (
+          !(
+            this.settings.dateFilters.beginDate <=
+              Number(record[filterColumn].value) &&
+            Number(record.datum.value) <= this.settings.dateFilters.endDate
+          )
+        ) {
+          tableRows.pop(record);
+        }
       }
     }
-    return this.tableData.filteredRows;
+    return tableRows;
+  }
+
+  textfilterTable(tableRows) {
+    for (let textFilter in this.settings.textFilters) {
+      if (this.settings.textFilters[textFilter]) {
+        console.log(textFilter, this.settings.textFilters[textFilter]);
+        for (let record of tableRows) {
+          if (
+            this.settings.textFilters[textFilter] !== record[textFilter].cell
+          ) {
+            tableRows.pop(record);
+            console.log(this.settings.textFilters[textFilter]);
+          }
+        }
+      }
+    }
+    return tableRows;
+  }
+
+  filterPageTable(tableRows) {
+    tableRows = tableRows.slice(
+      this.settings.page * this.settings.showRowNumber,
+      (this.settings.page + 1) * this.settings.showRowNumber
+    );
+    return tableRows;
+  }
+
+  getFilteredTableProperties(tableRows) {
+    console.log(tableRows.length);
+    this.tableData.recordNumber = tableRows.length;
+    this.setMaxPage();
   }
 
   renderTableBody() {
     let body = "";
     let row = [];
-    let recordDates = [];
-    this.tableData.recordNumber = 0;
 
     body += `<tbody>`;
 
-    for (let [rowNr, record] of this.filterTable(
-      this.tableData.body
-    ).entries()) {
+    let filteredTable = this.tableData.body;
+
+    filteredTable = this.dateFilterTable(filteredTable);
+    filteredTable = this.textfilterTable(filteredTable);
+
+    this.getFilteredTableProperties(filteredTable);
+
+    filteredTable = this.filterPageTable(filteredTable);
+
+    for (let [rowNr, record] of filteredTable.entries()) {
       let rowId;
-      let dateFilterPassed = false;
-      if (
-        Number(record.datum.value) <= this.settings.dateFilters.endDate &&
-        this.settings.dateFilters.beginDate <= Number(record.datum.value)
-      ) {
-        dateFilterPassed = true;
-        this.tableData.recordNumber++;
-        this.setMaxPages();
-      }
 
-      if (
-        this.settings.page * this.settings.showRowNumber <= rowNr &&
-        (this.settings.page + 1) * this.settings.showRowNumber - 1 >= rowNr &&
-        dateFilterPassed
-      ) {
-        let cells = [];
+      let cells = [];
 
-        for (let column in record) {
-          let order = record[column].order;
-          let value = record[column].value;
-          let type = record[column].type;
-          let cell = record[column].cell;
-          rowId = record[column].row;
+      for (let column in record) {
+        let order = record[column].order;
+        let value = record[column].value;
+        let type = record[column].type;
+        let cell = record[column].cell;
+        rowId = record[column].row;
 
-          cells[order] = `<td
+        cells[order] = `<td
             class="${column}${this.settings.columnShow[column] ? "" : " hide"}"
             ${value !== null ? `data-value="${value}"` : ``}
             data-type="${type}">${cell}</td>`;
-        }
+      }
 
-        row[rowNr] = `<tr
+      row[rowNr] = `<tr
           id="${rowId}"
           class="${record.datum.value}">${cells.join("")}</tr>`;
+    }
 
-        recordDates.push(record.datum.value);
-
-        if (
-          rowNr ==
-          this.settings.initialRow + this.settings.showRowNumber - 1
-        ) {
-          break;
-        }
-      }
-    }
-    if (this.settings.dateFilters.beginDate === -Infinity) {
-      this.settings.dateFilters.firstRecordDate = Math.min(...recordDates);
-    }
-    if (this.settings.dateFilters.endDate === Infinity) {
-      this.settings.dateFilters.LastRecordDate = Math.max(...recordDates);
-    }
     body += row.join("");
 
     body += `</tbody>`;
@@ -732,11 +819,16 @@ class dataTable {
 
     this.container.appendChild(this.table);
     this.table.innerHTML = table;
+
+    /* hát ez nincs túl jó helyen itt */
+    this.renderColumnFilter();
   }
 }
 
 let booking = new dataTable({
   containerID: "table-container",
-  datafile: "booking.csv",
+  dataFile: "booking.csv",
+  dateFilterColumns: ["datum"],
+  columnsToSummarize: [("munkaertek", "mennyiseg")],
 });
 booking.init();
