@@ -83,6 +83,62 @@ let Elem = {
   },
 };
 
+function uniqueID() {
+  return Math.random().toString(36).substr(2, 9);
+}
+
+let inputAndLabel = {
+  Create: function (parameters) {
+    let tag = parameters.tag || "input";
+    let type = parameters.type || null;
+    let id = parameters.id || tag + "-" + uniqueID();
+    let label = parameters.label || tag + "-" + "id";
+    let labelLast = parameters.labelLast || false;
+    let options = parameters.options || null;
+    let checked = parameters.checked || false;
+
+    let wrapperName = parameters.wrapperName || type;
+    let wrapper = parameters.wrapper || true;
+
+    let eventStarter = parameters.eventStarter;
+    let eventFunction = parameters.eventFunction;
+
+    let children = [
+      Elem.Create({
+        tag: "label",
+        content: label,
+        attributes: {
+          class: wrapperName + "-label",
+        },
+      }),
+      Elem.Create({
+        tag: tag,
+        attributes: {
+          type: type,
+          class: wrapperName + "-input",
+          id: id,
+          checked: checked,
+        },
+        children: options,
+        eventStarter: wrapper ? eventStarter : null,
+        eventFunction: wrapper ? eventFunction : null,
+      }),
+    ];
+
+    labelLast ? children.reverse() : null;
+
+    let complex = Elem.Create({
+      tag: "div",
+      attributes: {
+        class: wrapperName + "-wrapper",
+      },
+      children: children,
+    });
+
+    return complex;
+  },
+};
+
 class dataTable {
   constructor(parameters) {
     this.dataFile = parameters.dataFile;
@@ -244,7 +300,7 @@ class dataTable {
     this.settings.dateFilters.filterText = Elem.Create({
       tag: "p",
       attributes: {
-        classes: "filterText",
+        class: "filterText",
         id: "filterText",
       },
       content: generateFilterText(),
@@ -273,84 +329,48 @@ class dataTable {
     Elem.Create({
       tag: "div",
       attributes: {
-        classes: "dateFilterContainer",
+        class: "dateFilterContainer",
         id: "dateFilterContainer",
       },
       targetParent: this.tableController,
       children: [
-        Elem.Create({
-          tag: "div",
-          attributes: {
-            classes: "dateFilter-input",
+        inputAndLabel.Create({
+          tag: "input",
+          type: "date",
+          id: "beginDate",
+          label: "Kezdő dátum: ",
+          eventStarter: "change",
+          eventFunction: function (e) {
+            e.preventDefault();
+            let newBegintDate = Number(this.value.split("-").join(""));
+
+            that.settings.dateFilters.beginDate =
+              newBegintDate < that.settings.dateFilters.firstRecordDate
+                ? that.settings.dateFilters.firstRecordDate
+                : newBegintDate;
+
+            that.settings.dateFilters.filterText.innerHTML = generateFilterText();
+            that.renderTable();
           },
-          children: [
-            Elem.Create({
-              tag: "label",
-              content: "Kezdő dátum: ",
-              attributes: {
-                classes: "beginDate-label",
-                id: "beginDate-label",
-              },
-            }),
-            Elem.Create({
-              tag: "input",
-              attributes: {
-                type: "date",
-                classes: "beginDate",
-                id: "beginDate",
-              },
-              eventStarter: "change",
-              eventFunction: function (e) {
-                e.preventDefault();
-                let newBegintDate = Number(this.value.split("-").join(""));
-
-                that.settings.dateFilters.beginDate =
-                  newBegintDate < that.settings.dateFilters.firstRecordDate
-                    ? that.settings.dateFilters.firstRecordDate
-                    : newBegintDate;
-
-                that.settings.dateFilters.filterText.innerHTML = generateFilterText();
-                that.renderTable();
-              },
-            }),
-          ],
         }),
-        Elem.Create({
-          tag: "div",
-          attributes: {
-            classes: "dateFilter-input",
+        inputAndLabel.Create({
+          tag: "input",
+          type: "date",
+          id: "endDate",
+          label: "Befejező dátum: ",
+          eventStarter: "change",
+          eventFunction: function (e) {
+            e.preventDefault();
+            let newEndDate = Number(this.value.split("-").join(""));
+
+            that.settings.dateFilters.endDate =
+              newEndDate > that.settings.dateFilters.LastRecordDate
+                ? that.settings.dateFilters.LastRecordDate
+                : newEndDate;
+
+            that.settings.dateFilters.filterText.innerHTML = generateFilterText();
+            that.renderTable();
           },
-          children: [
-            Elem.Create({
-              tag: "label",
-              content: "Befejező dátum: ",
-              attributes: {
-                classes: "endDate-label",
-                id: "endDate-label",
-              },
-            }),
-            Elem.Create({
-              tag: "input",
-              attributes: {
-                type: "date",
-                classes: "endDate",
-                id: "endDate",
-              },
-              eventStarter: "change",
-              eventFunction: function (e) {
-                e.preventDefault();
-                let newEndDate = Number(this.value.split("-").join(""));
-
-                that.settings.dateFilters.endDate =
-                  newEndDate > that.settings.dateFilters.LastRecordDate
-                    ? that.settings.dateFilters.LastRecordDate
-                    : newEndDate;
-
-                that.settings.dateFilters.filterText.innerHTML = generateFilterText();
-                that.renderTable();
-              },
-            }),
-          ],
         }),
         that.settings.dateFilters.filterText,
       ],
@@ -363,39 +383,28 @@ class dataTable {
     let columnCheckBoxes = [];
     for (let column in this.tableData.header) {
       columnCheckBoxes.push(
-        Elem.Create({
-          tag: "div",
-          attributes: { class: "columnCheckbox" },
-          children: [
-            Elem.Create({
-              tag: "input",
-              content: this.tableData.header[column].name,
-              attributes: {
-                id: `${column}-checkbox`,
-                type: "checkbox",
-                checked: that.settings.columnShow[column],
-              },
-              eventStarter: "click",
-              eventFunction: function () {
-                let selecetdColumn = that.table.querySelectorAll(
-                  "." + this.id.split("-")[0]
-                );
-                that.settings.columnShow[this.id] = this.checked;
-                selecetdColumn.forEach((cell) => {
-                  if (!this.checked) {
-                    cell.classList.add("hide");
-                  } else {
-                    cell.classList.remove("hide");
-                  }
-                });
-              },
-            }),
-            Elem.Create({
-              tag: "label",
-              content: this.tableData.header[column].name,
-              attributes: { for: `${column}-checkbox` },
-            }),
-          ],
+        inputAndLabel.Create({
+          tag: "input",
+          type: "checkbox",
+          id: `${column}-checkbox`,
+          checked: that.settings.columnShow[column],
+          label: this.tableData.header[column].name,
+          wrapperName: "columnFilter",
+          labelLast: true,
+          eventStarter: "click",
+          eventFunction: function () {
+            let selecetdColumn = that.table.querySelectorAll(
+              "." + this.id.split("-")[0]
+            );
+            that.settings.columnShow[this.id] = this.checked;
+            selecetdColumn.forEach((cell) => {
+              if (!this.checked) {
+                cell.classList.add("hide");
+              } else {
+                cell.classList.remove("hide");
+              }
+            });
+          },
         })
       );
     }
@@ -403,7 +412,7 @@ class dataTable {
     Elem.Create({
       tag: "div",
       attributes: {
-        classes: "checkBoxesContainer",
+        class: "checkBoxesContainer",
         id: "checkBoxesContainer",
       },
       targetParent: this.tableController,
@@ -456,15 +465,11 @@ class dataTable {
       attributes: { class: "selectContainer" },
       targetParent: this.tableController,
       children: [
-        Elem.Create({
-          tag: "label",
-          attributes: { class: "rowControlLabel" },
-          content: "Sorok száma: ",
-        }),
-        Elem.Create({
+        inputAndLabel.Create({
           tag: "select",
-          attributes: { id: "rowNumberSelect" },
-          children: generateOptionText(),
+          label: "Sorok száma: ",
+          id: "rowNumberSelect",
+          options: generateOptionText(),
           eventStarter: "change",
           eventFunction: function (e) {
             e.preventDefault();
