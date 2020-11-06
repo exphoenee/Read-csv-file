@@ -706,9 +706,51 @@ class dataTable {
       return lowercase ? text.toLowerCase() : text;
     }
   }
-
+  /* ITT FOLYTASD!!! */
   renderTableHeader() {
+    Elem.Create({
+      tag: "table",
+      attributes: { class: "data-table" },
+      targetParent: document.body,
+      children: [
+        Elem.Create({
+          tag: "thead",
+          children: [
+            Elem.Create({
+              tag: "th",
+              content: "ES",
+            }),
+          ],
+        }),
+      ],
+    });
+
     let header = "";
+
+    header += `<thead>`;
+
+    let headerCells = [];
+    for (let headerCell in this.tableData.header) {
+      let cell = this.tableData.header[headerCell];
+      let order = cell.order;
+
+      this.settings.columnShow[headerCell] === undefined
+        ? (this.settings.columnShow[headerCell] = true)
+        : null;
+
+      headerCells[order] = `<th id="${headerCell}" class="${headerCell}${
+        this.settings.columnShow[headerCell] ? "" : " hide"
+      }">${this.tableData.header[headerCell].name}</th>`;
+    }
+    header += `<tr>${headerCells.join("")}</tr>`;
+
+    header += `</thead>`;
+    return header;
+  }
+
+  renderTableHeaderOld() {
+    let header = "";
+
     header += `<thead>`;
 
     let headerCells = [];
