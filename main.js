@@ -1,4 +1,40 @@
 let Elem = {
+  noSpecChars: function (text, lowercase = false) {
+    function replaceAll(string, search, replace) {
+      return string.split(search).join(replace);
+    }
+
+    let specialChars = {
+      é: "e",
+      á: "a",
+      ó: "o",
+      ö: "o",
+      ő: "o",
+      ú: "u",
+      ü: "u",
+      ű: "u",
+      í: "i",
+      É: "E",
+      Á: "A",
+      Ó: "O",
+      Ö: "O",
+      Ő: "O",
+      Ú: "U",
+      Ü: "U",
+      Ű: "U",
+      Í: "I",
+      " ": "-",
+      "/": "-",
+      ":": "-",
+      ";": "-",
+      "=": "-",
+    };
+    for (let char in specialChars) {
+      text = replaceAll(text, char, specialChars[char]);
+    }
+    return lowercase ? text.toLowerCase() : text;
+  },
+
   Create: function (parameters) {
     let tag = parameters.tag || "div";
     let attributes = parameters.attributes || {};
@@ -6,30 +42,42 @@ let Elem = {
     let eventStarter = parameters.eventStarter || null;
     let eventFunction = parameters.eventFunction || null;
     let content = parameters.content || null;
+    let text = parameters.text || null;
+
+    let targetParent =
+      typeof parameters.targetParent == "string"
+        ? document.querySelector(parameters.targetParent) ||
+          document.getElementById(parameters.targetParent)
+        : typeof parameters.targetParent == "object"
+        ? parameters.targetParent
+        : null;
 
     let elem = document.createElement(tag);
 
     for (let attr in attributes) {
-      elem.setAttribute(attr, attributes[attr]);
+      elem.setAttribute(
+        attr,
+        attr == "class" || attr == "id"
+          ? this.noSpecChars(attributes[attr])
+          : attributes[attr]
+      );
     }
 
     for (let i in children) {
       let child = children[i];
-
-      if (typeof child != "object") {
-        child = document.createTextNode(child);
-      }
-
+      typeof child != "object"
+        ? (child = document.createTextNode(child))
+        : null;
       elem.appendChild(child);
     }
 
-    if (content) {
-      elem.innerHTML = content;
-    }
+    content ? (elem.innerHTML = content) : null;
+    text ? (elem.text = text) : null;
 
-    if (eventStarter && eventFunction) {
-      elem.addEventListener(eventStarter, eventFunction);
-    }
+    eventStarter && eventFunction
+      ? elem.addEventListener(eventStarter, eventFunction)
+      : null;
+    targetParent ? targetParent.appendChild(elem) : null;
 
     return elem;
   },
@@ -209,9 +257,11 @@ class dataTable {
     //this.renderColumnFilter();
   }
 
+  /* Done! */
   renderColumnFilter() {
     let that = this;
     let filters = {};
+
     for (let column in this.tableData.header) {
       let texts = [];
       for (let row of this.tableData.body) {
@@ -223,15 +273,17 @@ class dataTable {
           texts.push(row[column].cell);
         }
       }
+
       if (texts.length > 0) {
         filters[column] = texts;
 
         let headerCell = document.getElementById(column);
 
-        let textFilter = new renderElement({
-          type: "select",
-          id: `${column}-textFilter`,
+        let textFilter = Elem.Create({
+          tag: "select",
+          attributes: { id: `${column}-textFilter` },
           targetParent: headerCell,
+          children: generateOptionText(),
           eventStarter: "change",
           eventFunction: function (e) {
             e.preventDefault();
@@ -240,22 +292,25 @@ class dataTable {
             that.renderTable();
           },
         });
-        textFilter.create();
 
-        texts.unshift("Nincs szűrés");
-        for (let [i, text] of texts.entries()) {
-          let option = new renderElement({
-            type: "option",
-            value: i === 0 ? null : text,
-            targetParent: textFilter.element,
-            innerContent: text,
-          });
-          option.create();
+        function generateOptionText() {
+          texts.unshift("Nincs szűrés");
+
+          let options = [];
+          for (let [i, text] of texts.entries()) {
+            let option = Elem.Create({
+              tag: "option",
+              content: text,
+            });
+            options.push(option);
+          }
+          return options;
         }
       }
     }
   }
 
+  /* must refactoring */
   dateFilter() {
     /* ide több dátum filtert a parametersben megadott tömb szerint!*/
     let that = this;
@@ -346,6 +401,97 @@ class dataTable {
     }
   }
 
+  dateFilterold() {
+    /* ide több dátum filtert a parametersben megadott tömb szerint!*/
+    let that = this;
+
+    let dateFilterContainer = new renderElement({
+      type: "div",
+      classes: "dateFilterContainer",
+      id: "dateFilterContainer",
+      targetParent: this.tableController.element,
+    });
+    dateFilterContainer.create();
+
+    let beginDate = new renderElement({
+      type: "input",
+      inputType: "date",
+      classes: "beginDate",
+      id: "beginDate",
+      targetParent: dateFilterContainer.element,
+      eventStarter: "change",
+      eventFunction: function (e) {
+        e.preventDefault();
+        let newBegintDate = Number(this.value.split("-").join(""));
+
+        that.settings.dateFilters.beginDate =
+          newBegintDate < that.settings.dateFilters.firstRecordDate
+            ? that.settings.dateFilters.firstRecordDate
+            : newBegintDate;
+
+        generateFilterText();
+        that.renderTable();
+      },
+    });
+    beginDate.create();
+
+    let endDate = new renderElement({
+      type: "input",
+      inputType: "date",
+      classes: "endDate",
+      id: "endDate",
+      targetParent: dateFilterContainer.element,
+      eventStarter: "change",
+      eventFunction: function (e) {
+        e.preventDefault();
+        let newEndDate = Number(this.value.split("-").join(""));
+
+        that.settings.dateFilters.endDate =
+          newEndDate > that.settings.dateFilters.LastRecordDate
+            ? that.settings.dateFilters.LastRecordDate
+            : newEndDate;
+
+        generateFilterText();
+        that.renderTable();
+      },
+    });
+    endDate.create();
+
+    let filterText = new renderElement({
+      type: "p",
+      classes: "filterText",
+      id: "filterText",
+      targetParent: dateFilterContainer.element,
+      innerContent: generateFilterText(),
+    });
+    filterText.create();
+    that.settings.dateFilters.filterText = filterText.element;
+
+    function generateFilterText() {
+      function dateToText(date) {
+        let dateTxt = String(date);
+        return (
+          dateTxt.slice(0, 4) +
+          ". " +
+          dateTxt.slice(4, 6) +
+          ". " +
+          dateTxt.slice(6, 8) +
+          "."
+        );
+      }
+      let filterText =
+        "Dátumszűrés: " +
+        dateToText(that.settings.dateFilters.beginDate) +
+        " - " +
+        dateToText(that.settings.dateFilters.endDate);
+      if (that.settings.dateFilters.filterText) {
+        that.settings.dateFilters.filterText.innerHTML = filterText;
+      }
+      return filterText;
+    }
+  }
+
+  /* must refactoring */
   renderColumnControl() {
     let that = this;
 
@@ -392,116 +538,105 @@ class dataTable {
     }
   }
 
+  /* done! */
   renderPageControl() {
     let that = this;
 
-    let selectContainer = new renderElement({
-      type: "div",
-      classes: "selectContainer",
-      targetParent: this.tableController.element,
-    });
-    selectContainer.create();
+    function generateOptionText() {
+      that.settings.rowNumberOptions.push(that.tableData.allRecordNumber);
+      let options = [];
+      for (let rowNumberOption of that.settings.rowNumberOptions) {
+        if (rowNumberOption <= that.tableData.allRecordNumber) {
+          let text;
+          text =
+            rowNumberOption !== that.tableData.allRecordNumber
+              ? rowNumberOption
+              : "összes";
+          text += " sor";
 
-    let controllLabel = new renderElement({
-      type: "label",
-      classes: "rowControlLabel",
-      targetParent: selectContainer.element,
-      labelFor: "rowNumberSelect",
-      innerContent: "Sorok száma: ",
-    });
-    controllLabel.create();
-
-    let rowNumberSelect = new renderElement({
-      type: "select",
-      id: "rowNumberSelect",
-      targetParent: selectContainer.element,
-      eventStarter: "change",
-      eventFunction: function (e) {
-        e.preventDefault();
-        let currentRow = that.settings.showRowNumber * that.settings.page;
-        that.settings.showRowNumber = Number(this.value);
-        that.settings.page = Math.floor(
-          currentRow / that.settings.showRowNumber
-        );
-        that.setMaxPage();
-        generatePageText();
-        that.renderTable();
-      },
-    });
-    rowNumberSelect.create();
-
-    let prevButton = new renderElement({
-      type: "button",
-      id: "prevPage",
-      targetParent: selectContainer.element,
-      innerContent: "Előző: ",
-      eventStarter: "click",
-      eventFunction: function (e) {
-        e.preventDefault();
-        that.settings.page--;
-        if (that.settings.page < 0) {
-          that.settings.page = 0;
+          let option = Elem.Create({
+            tag: "option",
+            content: text,
+            attributes: { value: rowNumberOption },
+          });
+          options.push(option);
         }
-        that.renderTable();
-      },
-    });
-    prevButton.create();
-
-    let nextButton = new renderElement({
-      type: "button",
-      id: "nextPage",
-      targetParent: selectContainer.element,
-      innerContent: "Következő: ",
-      eventStarter: "click",
-      eventFunction: function (e) {
-        e.preventDefault();
-        that.settings.page++;
-        if (that.settings.page > that.settings.maxPage) {
-          that.settings.page = that.settings.maxPage;
-        }
-        generatePageText();
-        that.renderTable();
-      },
-    });
-    nextButton.create();
+      }
+      return options;
+    }
 
     function generatePageText() {
       let text = `${that.settings.page + 1}. oldal a(z) ${
         that.settings.maxPage + 1
       } oldalból`;
-      if (that.settings.pageNumberText) {
-        that.settings.pageNumberText.innerHTML = text;
-      } else return text;
+
+      return text;
     }
 
-    let pageNumber = new renderElement({
-      type: "p",
-      id: "siteNumber",
-      targetParent: selectContainer.element,
-      innerContent: generatePageText(),
+    this.settings.pageNumberText = Elem.Create({
+      tag: "p",
+      attributes: { id: "siteNumber" },
+      content: generatePageText(),
     });
-    pageNumber.create();
-    this.settings.pageNumberText = pageNumber.element;
 
-    this.settings.rowNumberOptions.push(this.tableData.allRecordNumber);
-
-    for (let rowNumberOption of this.settings.rowNumberOptions) {
-      if (rowNumberOption <= this.tableData.allRecordNumber) {
-        let text =
-          rowNumberOption !== this.tableData.allRecordNumber
-            ? rowNumberOption
-            : "összes";
-        text += " sor";
-
-        let option = new renderElement({
-          type: "option",
-          value: rowNumberOption,
-          targetParent: rowNumberSelect.element,
-          innerContent: text,
-        });
-        option.create();
-      }
-    }
+    let selectContainer = Elem.Create({
+      tag: "div",
+      attributes: { class: "selectContainer" },
+      targetParent: this.tableController.element,
+      children: [
+        Elem.Create({
+          tag: "label",
+          attributes: { class: "rowControlLabel" },
+          content: "Sorok száma: ",
+        }),
+        Elem.Create({
+          tag: "select",
+          attributes: { id: "rowNumberSelect" },
+          children: generateOptionText(),
+          eventStarter: "change",
+          eventFunction: function (e) {
+            e.preventDefault();
+            let currentRow = that.settings.showRowNumber * that.settings.page;
+            that.settings.showRowNumber = Number(this.value);
+            that.settings.page = Math.floor(
+              currentRow / that.settings.showRowNumber
+            );
+            that.setMaxPage();
+            that.settings.pageNumberText.innerHTML = generatePageText();
+            that.renderTable();
+          },
+        }),
+        Elem.Create({
+          tag: "button",
+          attributes: { id: "prevPage" },
+          content: "Előző",
+          eventStarter: "click",
+          eventFunction: function (e) {
+            e.preventDefault();
+            that.settings.page--;
+            that.settings.page < 0 ? (that.settings.page = 0) : null;
+            that.settings.pageNumberText.innerHTML = generatePageText();
+            that.renderTable();
+          },
+        }),
+        Elem.Create({
+          tag: "button",
+          attributes: { id: "nextPage" },
+          content: "Következő",
+          eventStarter: "click",
+          eventFunction: function (e) {
+            e.preventDefault();
+            that.settings.page++;
+            that.settings.page > that.settings.maxPage
+              ? (that.settings.page = that.settings.maxPage)
+              : null;
+            that.settings.pageNumberText.innerHTML = generatePageText();
+            that.renderTable();
+          },
+        }),
+        that.settings.pageNumberText,
+      ],
+    });
   }
 
   buildTableObject(rawData) {
@@ -783,6 +918,7 @@ class dataTable {
     this.setMaxPage();
   }
 
+  /* must refactoring */
   renderTableBody() {
     let body = "";
     let row = [];
@@ -827,6 +963,7 @@ class dataTable {
     return body;
   }
 
+  /* must refactoring */
   renderTableFooter() {
     let footer = "";
     footer += `<tfoot>`;
@@ -847,6 +984,7 @@ class dataTable {
     return footer;
   }
 
+  /* must refactoring */
   renderTable() {
     let table = "";
 
