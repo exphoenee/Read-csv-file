@@ -1,5 +1,8 @@
 let Elem = {
   noSpecChars: function (text, lowercase = false) {
+    if (typeof text !== "string") {
+      text = text.toString();
+    }
     function replaceAll(string, search, replace) {
       return string.split(search).join(replace);
     }
@@ -38,6 +41,7 @@ let Elem = {
   Create: function (parameters) {
     let tag = parameters.tag || "div";
     let attributes = parameters.attributes || {};
+    let dataset = parameters.dataset || {};
     let children = parameters.children || [];
     let eventStarter = parameters.eventStarter || null;
     let eventFunction = parameters.eventFunction || null;
@@ -79,6 +83,10 @@ let Elem = {
       : null;
     targetParent ? targetParent.appendChild(elem) : null;
 
+    for (let data in dataset) {
+      elem.dataset[data] = dataset[data];
+    }
+
     return elem;
   },
 };
@@ -109,6 +117,7 @@ let inputAndLabel = {
         content: label,
         attributes: {
           class: wrapperName + "-label",
+          for: id,
         },
       }),
       Elem.Create({
@@ -237,7 +246,6 @@ class dataTable {
     this.renderPageControl();
     this.dateFilter();
     this.renderColumnControl();
-    //this.renderColumnFilter();
   }
 
   renderColumnFilter() {
@@ -711,70 +719,42 @@ class dataTable {
       return lowercase ? text.toLowerCase() : text;
     }
   }
-  /* ITT FOLYTASD!!! */
+
   renderTableHeader() {
-    Elem.Create({
-      tag: "table",
-      attributes: { class: "data-table" },
-      targetParent: document.body,
+    let headerCells = [];
+
+    for (let headerCell in this.tableData.header) {
+      let cell = this.tableData.header[headerCell];
+      let order = cell.order;
+
+      this.settings.columnShow[headerCell] === undefined
+        ? (this.settings.columnShow[headerCell] = true)
+        : null;
+
+      headerCells[order] = Elem.Create({
+        tag: "th",
+        attributes: {
+          id: headerCell,
+          class:
+            headerCell + " " + this.settings.columnShow[headerCell]
+              ? ""
+              : " hide",
+        },
+        content: this.tableData.header[headerCell].name,
+      });
+    }
+
+    let header = Elem.Create({
+      tag: "thead",
       children: [
         Elem.Create({
-          tag: "thead",
-          children: [
-            Elem.Create({
-              tag: "th",
-              content: "ES",
-            }),
-          ],
+          tag: "tr",
+          children: headerCells,
         }),
       ],
     });
 
-    let header = "";
-
-    header += `<thead>`;
-
-    let headerCells = [];
-    for (let headerCell in this.tableData.header) {
-      let cell = this.tableData.header[headerCell];
-      let order = cell.order;
-
-      this.settings.columnShow[headerCell] === undefined
-        ? (this.settings.columnShow[headerCell] = true)
-        : null;
-
-      headerCells[order] = `<th id="${headerCell}" class="${headerCell}${
-        this.settings.columnShow[headerCell] ? "" : " hide"
-      }">${this.tableData.header[headerCell].name}</th>`;
-    }
-    header += `<tr>${headerCells.join("")}</tr>`;
-
-    header += `</thead>`;
-    return header;
-  }
-
-  renderTableHeaderOld() {
-    let header = "";
-
-    header += `<thead>`;
-
-    let headerCells = [];
-    for (let headerCell in this.tableData.header) {
-      let cell = this.tableData.header[headerCell];
-      let order = cell.order;
-
-      this.settings.columnShow[headerCell] === undefined
-        ? (this.settings.columnShow[headerCell] = true)
-        : null;
-
-      headerCells[order] = `<th id="${headerCell}" class="${headerCell}${
-        this.settings.columnShow[headerCell] ? "" : " hide"
-      }">${this.tableData.header[headerCell].name}</th>`;
-    }
-    header += `<tr>${headerCells.join("")}</tr>`;
-
-    header += `</thead>`;
-    return header;
+    return header.outerHTML;
   }
 
   setMaxPage() {
@@ -789,69 +769,70 @@ class dataTable {
     this.settings.page = Math.min(this.settings.maxPage, this.settings.page);
   }
 
-  dateFilterTable(tableRows) {
-    for (let filterColumn of this.settings.dateFilterColumns) {
-      for (let record of this.tableData.body) {
-        if (
-          !(
-            this.settings.dateFilters.beginDate <=
-              Number(record[filterColumn].value) &&
-            Number(record.datum.value) <= this.settings.dateFilters.endDate
-          )
-        ) {
-          tableRows.pop(record);
-        }
-      }
-    }
-    return tableRows;
-  }
-
-  textfilterTable(tableRows) {
-    for (let textFilter in this.settings.textFilters) {
-      if (this.settings.textFilters[textFilter]) {
-        console.log(textFilter, this.settings.textFilters[textFilter]);
-        for (let record of tableRows) {
-          if (
-            this.settings.textFilters[textFilter] !== record[textFilter].cell
-          ) {
-            tableRows.pop(record);
-            console.log(this.settings.textFilters[textFilter]);
-          }
-        }
-      }
-    }
-    return tableRows;
-  }
-
-  filterPageTable(tableRows) {
-    tableRows = tableRows.slice(
-      this.settings.page * this.settings.showRowNumber,
-      (this.settings.page + 1) * this.settings.showRowNumber
-    );
-    return tableRows;
-  }
-
   getFilteredTableProperties(tableRows) {
-    console.log(tableRows.length);
     this.tableData.recordNumber = tableRows.length;
     this.setMaxPage();
   }
 
-  /* must refactoring */
-  renderTableBody() {
-    let body = "";
-    let row = [];
+  filtering() {
+    let that = this;
+    function dateFilterTable(tableRows) {
+      for (let filterColumn of that.settings.dateFilterColumns) {
+        for (let record of that.tableData.body) {
+          if (
+            !(
+              that.settings.dateFilters.beginDate <=
+                Number(record[filterColumn].value) &&
+              Number(record.datum.value) <= that.settings.dateFilters.endDate
+            )
+          ) {
+            tableRows.pop(record);
+          }
+        }
+      }
+      return tableRows;
+    }
 
-    body += `<tbody>`;
+    function textfilterTable(tableRows) {
+      for (let textFilter in that.settings.textFilters) {
+        if (that.settings.textFilters[textFilter]) {
+          console.log(textFilter, that.settings.textFilters[textFilter]);
+          for (let record of tableRows) {
+            if (
+              that.settings.textFilters[textFilter] !== record[textFilter].cell
+            ) {
+              tableRows.pop(record);
+              console.log(that.settings.textFilters[textFilter]);
+            }
+          }
+        }
+      }
+      return tableRows;
+    }
+
+    function filterPageTable(tableRows) {
+      tableRows = tableRows.slice(
+        that.settings.page * that.settings.showRowNumber,
+        (that.settings.page + 1) * that.settings.showRowNumber
+      );
+      return tableRows;
+    }
 
     let filteredTable = this.tableData.body;
 
-    filteredTable = this.dateFilterTable(filteredTable);
-    filteredTable = this.textfilterTable(filteredTable);
+    filteredTable = dateFilterTable(filteredTable);
+    filteredTable = textfilterTable(filteredTable);
 
     this.getFilteredTableProperties(filteredTable);
 
-    filteredTable = this.filterPageTable(filteredTable);
+    /* Ennek a táblázat szűrése után kell lennie!!! */
+    filteredTable = filterPageTable(filteredTable);
+
+    return filteredTable;
+  }
+
+  renderTableBody(filteredTable) {
+    let row = [];
 
     for (let [rowNr, record] of filteredTable.entries()) {
       let rowId;
@@ -860,26 +841,38 @@ class dataTable {
 
       for (let column in record) {
         let order = record[column].order;
-        let value = record[column].value;
-        let type = record[column].type;
-        let cell = record[column].cell;
         rowId = record[column].row;
 
-        cells[order] = `<td
-            class="${column}${this.settings.columnShow[column] ? "" : " hide"}"
-            ${value !== null ? `data-value="${value}"` : ``}
-            data-type="${type}">${cell}</td>`;
+        cells[order] = Elem.Create({
+          tag: "td",
+          content: record[column].cell,
+          attributes: {
+            class:
+              column + " " + this.settings.columnShow[column] ? "" : " hide",
+          },
+          dataset: {
+            value:
+              record[column].value !== null
+                ? `data-value="${record[column].value}"`
+                : ``,
+            type: record[column].type,
+          },
+        });
       }
 
-      row[rowNr] = `<tr
-          id="${rowId}"
-          class="${record.datum.value}">${cells.join("")}</tr>`;
+      row[rowNr] = Elem.Create({
+        tag: "tr",
+        attributes: { id: rowId, class: record.datum.value },
+        children: cells,
+      });
     }
 
-    body += row.join("");
+    let body = Elem.Create({
+      tag: "tbody",
+      children: row,
+    });
 
-    body += `</tbody>`;
-    return body;
+    return body.outerHTML;
   }
 
   /* must refactoring */
@@ -903,12 +896,14 @@ class dataTable {
     return footer;
   }
 
-  /* must refactoring */
   renderTable() {
     let table = "";
 
     table += this.renderTableHeader();
-    table += this.renderTableBody();
+
+    let filterTable = this.filtering();
+    table += this.renderTableBody(filterTable);
+
     table += this.renderTableFooter();
 
     this.container.appendChild(this.table);
