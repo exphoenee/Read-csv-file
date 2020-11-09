@@ -722,6 +722,7 @@ class dataTable {
 
   renderTableHeader() {
     let headerCells = [];
+    let footerCells = [];
 
     for (let headerCell in this.tableData.header) {
       let cell = this.tableData.header[headerCell];
@@ -731,16 +732,31 @@ class dataTable {
         ? (this.settings.columnShow[headerCell] = true)
         : null;
 
+      let classes = this.settings.columnShow[headerCell]
+        ? headerCell
+        : headerCell + " hide";
+
       headerCells[order] = Elem.Create({
         tag: "th",
         attributes: {
           id: headerCell,
-          class:
-            headerCell + " " + this.settings.columnShow[headerCell]
-              ? ""
-              : " hide",
+          class: classes,
         },
         content: this.tableData.header[headerCell].name,
+      });
+
+      let footerContent = `${this.tableData.header[headerCell].name}${
+        this.tableData.footer[headerCell].summary
+          ? ` összesen: ${this.tableData.footer[headerCell].summary}`
+          : ``
+      }`;
+
+      footerCells[order] = Elem.Create({
+        tag: "th",
+        attributes: {
+          class: classes,
+        },
+        content: footerContent,
       });
     }
 
@@ -754,7 +770,17 @@ class dataTable {
       ],
     });
 
-    return header.outerHTML;
+    let footer = Elem.Create({
+      tag: "tfoot",
+      children: [
+        Elem.Create({
+          tag: "tr",
+          children: footerCells,
+        }),
+      ],
+    });
+
+    return { footer: header.outerHTML, header: footer.outerHTML };
   }
 
   setMaxPage() {
@@ -795,14 +821,19 @@ class dataTable {
 
     function textfilterTable(tableRows) {
       for (let textFilter in that.settings.textFilters) {
-        if (that.settings.textFilters[textFilter]) {
-          console.log(textFilter, that.settings.textFilters[textFilter]);
-          for (let record of tableRows) {
+        if (that.settings.textFilters[textFilter] !== null) {
+          for (let [index, record] of tableRows.entries()) {
             if (
-              that.settings.textFilters[textFilter] !== record[textFilter].cell
+              that.settings.textFilters[textFilter] === record[textFilter].cell
             ) {
-              tableRows.pop(record);
-              console.log(that.settings.textFilters[textFilter]);
+              console.log(
+                that.settings.textFilters[textFilter],
+                "vs",
+                record[textFilter].cell,
+                index
+              );
+              tableRows.splice(index, 1);
+              console.log(tableRows.length);
             }
           }
         }
@@ -820,13 +851,17 @@ class dataTable {
 
     let filteredTable = this.tableData.body;
 
+    console.log(filteredTable.length);
     filteredTable = dateFilterTable(filteredTable);
+    console.log(filteredTable.length);
     filteredTable = textfilterTable(filteredTable);
+    console.log(filteredTable.length);
 
     this.getFilteredTableProperties(filteredTable);
 
     /* Ennek a táblázat szűrése után kell lennie!!! */
     filteredTable = filterPageTable(filteredTable);
+    //console.log(filteredTable.length);
 
     return filteredTable;
   }
@@ -843,18 +878,17 @@ class dataTable {
         let order = record[column].order;
         rowId = record[column].row;
 
+        let classes =
+          this.settings.columnShow[column] === true ? column : column + " hide";
+
         cells[order] = Elem.Create({
           tag: "td",
           content: record[column].cell,
           attributes: {
-            class:
-              column + " " + this.settings.columnShow[column] ? "" : " hide",
+            class: classes,
           },
           dataset: {
-            value:
-              record[column].value !== null
-                ? `data-value="${record[column].value}"`
-                : ``,
+            value: record[column].value !== null ? record[column].value : "",
             type: record[column].type,
           },
         });
@@ -875,36 +909,16 @@ class dataTable {
     return body.outerHTML;
   }
 
-  /* must refactoring */
-  renderTableFooter() {
-    let footer = "";
-    footer += `<tfoot>`;
-    let footerCells = [];
-    for (let footerCell in this.tableData.header) {
-      let cell = this.tableData.footer[footerCell];
-      let order = cell.order;
-      let summary = this.tableData.footer[footerCell].summary;
-
-      footerCells[order] = `<td class="${footerCell}
-      ${this.settings.columnShow[footerCell] ? "" : " hide"}
-      ">${this.tableData.header[footerCell].name}${
-        summary ? ` összesen: ${summary}` : ``
-      }</td>`;
-    }
-    footer += `<tr>${footerCells.join("")}</tr>`;
-    footer += `</tfoot>`;
-    return footer;
-  }
-
   renderTable() {
     let table = "";
 
-    table += this.renderTableHeader();
+    let headerAndFooter = this.renderTableHeader();
 
-    let filterTable = this.filtering();
-    table += this.renderTableBody(filterTable);
+    table += headerAndFooter.header;
 
-    table += this.renderTableFooter();
+    table += this.renderTableBody(this.filtering());
+
+    table += headerAndFooter.footer;
 
     this.container.appendChild(this.table);
     this.table.innerHTML = table;
@@ -918,6 +932,6 @@ let booking = new dataTable({
   containerID: "table-container",
   dataFile: "booking.csv",
   dateFilterColumns: ["datum"],
-  columnsToSummarize: [("munkaertek", "mennyiseg")],
+  columnsToSummarize: ["munkaertek", "mennyiseg"],
 });
 booking.init();
