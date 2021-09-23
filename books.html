@@ -129,6 +129,7 @@
       const renderBookInfo = (book) => {
         return Elem.Create({
           tag: "div",
+          attributes: { class: "main-info" },
           children: [
             Elem.Create({
               tag: "h2",
@@ -145,7 +146,7 @@
       const renderMoreInfo = (book) => {
         return Elem.Create({
           tag: "div",
-          attributes: { style: "display: none" },
+          attributes: { style: "display: none", class: "main-info" },
           children: [
             Elem.Create({
               tag: "p",
