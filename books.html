@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <!--script src="jquery-3.5.1.min.js"></script-->
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const books = [
+        {
+          id: 1,
+          author: "Gipsz, Jakab",
+          title: "A Jetik vándorlásai útvonalainak változása 1976-2020",
+          year: 2021,
+          category: "Book",
+        },
+        {
+          id: 2,
+          author: "Horváth Géza",
+          title: "A Jetik evolúciója",
+          year: 2011,
+          category: "Jeti",
+        },
+        {
+          id: 3,
+          author: "Chuck Norris",
+          title: "Jetik ölésének 99 módja",
+          year: 1992,
+          category: "Öléstan",
+        },
+        {
+          id: 4,
+          author: "Jeti",
+          title: "Chuck Norris ölés 100 módja",
+          year: 1993,
+          category: "Öléstan",
+        },
+      ];
+
+      let Elem = {
+        noSpecChars: function (text, lowercase = false) {
+          function replaceAll(string, search, replace) {
+            return string.split(search).join(replace);
+          }
+
+          let specialChars = {
+            é: "e",
+            á: "a",
+            ó: "o",
+            ö: "o",
+            ő: "o",
+            ú: "u",
+            ü: "u",
+            ű: "u",
+            í: "i",
+            É: "E",
+            Á: "A",
+            Ó: "O",
+            Ö: "O",
+            Ő: "O",
+            Ú: "U",
+            Ü: "U",
+            Ű: "U",
+            Í: "I",
+            " ": "-",
+            "/": "-",
+            ":": "-",
+            ";": "-",
+            "=": "-",
+          };
+          for (let char in specialChars) {
+            text = replaceAll(text, char, specialChars[char]);
+          }
+          return lowercase ? text.toLowerCase() : text;
+        },
+
+        Create: function (parameters) {
+          let tag = parameters.tag || "div";
+          let attributes = parameters.attributes || {};
+          let children = parameters.children || [];
+          let eventStarter = parameters.eventStarter || null;
+          let eventFunction = parameters.eventFunction || null;
+          let content = parameters.content || null;
+          let text = parameters.text || null;
+
+          let targetParent =
+            typeof parameters.targetParent == "string"
+              ? document.querySelector(parameters.targetParent) ||
+                document.getElementById(parameters.targetParent)
+              : typeof parameters.targetParent == "object"
+              ? parameters.targetParent
+              : null;
+
+          let elem = document.createElement(tag);
+
+          for (let attr in attributes) {
+            elem.setAttribute(
+              attr,
+              attr == "class" || attr == "id"
+                ? this.noSpecChars(attributes[attr])
+                : attributes[attr]
+            );
+          }
+
+          for (let i in children) {
+            let child = children[i];
+            typeof child != "object"
+              ? (child = document.createTextNode(child))
+              : null;
+            elem.appendChild(child);
+          }
+
+          content ? (elem.innerHTML = content) : null;
+          text ? (elem.text = text) : null;
+
+          eventStarter && eventFunction
+            ? elem.addEventListener(eventStarter, eventFunction)
+            : null;
+          targetParent ? targetParent.appendChild(elem) : null;
+
+          return elem;
+        },
+      };
+
+      const generateBook = (book) => {
+        Elem.Create({
+          tag: "div",
+          targetParent: "app",
+          id: `book-${book.id}`,
+          children: [
+            Elem.Create({
+              tag: "h2",
+              content: `${book.author}: `,
+            }),
+            Elem.Create({
+              tag: "h1",
+              content: book.title,
+            }),
+            Elem.Create({
+              tag: "button",
+              content: "Több infó",
+              eventStarter: "click",
+              eventFunction: function (event) {
+                event.preventDefault();
+                console.log("clicked" + event.target.id);
+              },
+            }),
+          ],
+        });
+      };
+
+      books.map((book) => {
+        generateBook(book);
+      });
+    </script>
+  </body>
+</html>
