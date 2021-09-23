@@ -106,82 +106,94 @@
             );
           }
 
-          for (let i in children) {
-            let child = children[i];
+          children.map((child) => {
             typeof child != "object"
               ? (child = document.createTextNode(child))
               : null;
             elem.appendChild(child);
-          }
+          });
 
-          content ? (elem.innerHTML = content) : null;
-          text ? (elem.text = text) : null;
+          if (content) elem.innerHTML = content;
 
-          eventStarter && eventFunction
-            ? elem.addEventListener(eventStarter, eventFunction)
-            : null;
-          targetParent ? targetParent.appendChild(elem) : null;
+          if (text) elem.text = text;
+
+          if (eventStarter && eventFunction)
+            elem.addEventListener(eventStarter, eventFunction);
+
+          if (targetParent) targetParent.appendChild(elem);
 
           return elem;
         },
       };
 
-      const generateBook = (book) => {
-        Elem.Create({
+      const renderBookInfo = (book) => {
+        return Elem.Create({
           tag: "div",
-          targetParent: "app",
-          attributes: { id: `book-${book.id}` },
           children: [
             Elem.Create({
-              tag: "div",
-              children: [
-                Elem.Create({
-                  tag: "h2",
-                  content: `Szerző: ${book.author}`,
-                }),
-                Elem.Create({
-                  tag: "h1",
-                  content: `Cím: ${book.title}`,
-                }),
-              ],
+              tag: "h2",
+              content: `Szerző: ${book.author}`,
             }),
             Elem.Create({
-              tag: "div",
-              attributes: { style: "display: none" },
-              children: [
-                Elem.Create({
-                  tag: "p",
-                  content: `Megjelenés éve: ${book.year}`,
-                }),
-                Elem.Create({
-                  tag: "p",
-                  content: `Kategória: ${book.category}`,
-                }),
-              ],
-            }),
-            Elem.Create({
-              tag: "button",
-              content: "Több infó",
-              eventStarter: "click",
-              eventFunction: function (event) {
-                event.preventDefault();
-                const state = {
-                  none: "block",
-                  block: "none",
-                  "Több infó": "Kevesebb infó",
-                  "Kevesebb infó": "Több infó",
-                };
-                event.target.previousSibling.style.display =
-                  state[event.target.previousSibling.style.display];
-                event.target.innerHTML = state[event.target.innerHTML];
-              },
+              tag: "h1",
+              content: `Cím: ${book.title}`,
             }),
           ],
         });
       };
 
+      const renderMoreInfo = (book) => {
+        return Elem.Create({
+          tag: "div",
+          attributes: { style: "display: none" },
+          children: [
+            Elem.Create({
+              tag: "p",
+              content: `Megjelenés éve: ${book.year}`,
+            }),
+            Elem.Create({
+              tag: "p",
+              content: `Kategória: ${book.category}`,
+            }),
+          ],
+        });
+      };
+
+      const renderInfoButton = (book) => {
+        return Elem.Create({
+          tag: "button",
+          content: "Több infó",
+          eventStarter: "click",
+          eventFunction: function (event) {
+            event.preventDefault();
+            const state = {
+              none: "block",
+              block: "none",
+              "Több infó": "Kevesebb infó",
+              "Kevesebb infó": "Több infó",
+            };
+            event.target.previousSibling.style.display =
+              state[event.target.previousSibling.style.display];
+            event.target.innerHTML = state[event.target.innerHTML];
+          },
+        });
+      };
+
+      const renderBook = (book) => {
+        Elem.Create({
+          tag: "div",
+          targetParent: "app",
+          attributes: { id: `book-${book.id}` },
+          children: [
+            renderBookInfo(book),
+            renderMoreInfo(book),
+            renderInfoButton(book),
+          ],
+        });
+      };
+
       books.map((book) => {
-        generateBook(book);
+        renderBook(book);
       });
     </script>
   </body>
