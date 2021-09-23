@@ -63,21 +63,20 @@ let Elem = {
       );
     }
 
-    for (let i in children) {
-      let child = children[i];
+    children.map((child) => {
       typeof child != "object"
         ? (child = document.createTextNode(child))
         : null;
       elem.appendChild(child);
-    }
+    });
 
-    content ? (elem.innerHTML = content) : null;
-    text ? (elem.text = text) : null;
+    if (content) elem.innerHTML = content;
+    if (text) elem.text = text;
 
-    eventStarter && eventFunction
-      ? elem.addEventListener(eventStarter, eventFunction)
-      : null;
-    targetParent ? targetParent.appendChild(elem) : null;
+    if (eventStarter && eventFunction)
+      elem.addEventListener(eventStarter, eventFunction);
+
+    if (targetParent) targetParent.appendChild(elem);
 
     return elem;
   },
