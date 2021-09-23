@@ -130,15 +130,34 @@
         Elem.Create({
           tag: "div",
           targetParent: "app",
-          id: `book-${book.id}`,
+          attributes: { id: `book-${book.id}` },
           children: [
             Elem.Create({
-              tag: "h2",
-              content: `${book.author}: `,
+              tag: "div",
+              children: [
+                Elem.Create({
+                  tag: "h2",
+                  content: `Szerző: ${book.author}`,
+                }),
+                Elem.Create({
+                  tag: "h1",
+                  content: `Cím: ${book.title}`,
+                }),
+              ],
             }),
             Elem.Create({
-              tag: "h1",
-              content: book.title,
+              tag: "div",
+              attributes: { style: "display: none" },
+              children: [
+                Elem.Create({
+                  tag: "p",
+                  content: `Megjelenés éve: ${book.year}`,
+                }),
+                Elem.Create({
+                  tag: "p",
+                  content: `Kategória: ${book.category}`,
+                }),
+              ],
             }),
             Elem.Create({
               tag: "button",
@@ -146,7 +165,15 @@
               eventStarter: "click",
               eventFunction: function (event) {
                 event.preventDefault();
-                console.log("clicked" + event.target.id);
+                const state = {
+                  none: "block",
+                  block: "none",
+                  "Több infó": "Kevesebb infó",
+                  "Kevesebb infó": "Több infó",
+                };
+                event.target.previousSibling.style.display =
+                  state[event.target.previousSibling.style.display];
+                event.target.innerHTML = state[event.target.innerHTML];
               },
             }),
           ],
