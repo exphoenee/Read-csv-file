@@ -357,7 +357,8 @@ class dataTable {
                 ? that.settings.dateFilters.firstRecordDate
                 : newBegintDate;
 
-            that.settings.dateFilters.filterText.innerHTML = generateFilterText();
+            that.settings.dateFilters.filterText.innerHTML =
+              generateFilterText();
             that.renderTable();
           },
         }),
@@ -376,7 +377,8 @@ class dataTable {
                 ? that.settings.dateFilters.LastRecordDate
                 : newEndDate;
 
-            that.settings.dateFilters.filterText.innerHTML = generateFilterText();
+            that.settings.dateFilters.filterText.innerHTML =
+              generateFilterText();
             that.renderTable();
           },
         }),
